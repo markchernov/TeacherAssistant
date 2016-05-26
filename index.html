@@ -8,7 +8,7 @@
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
-    <script src="AngularFirebaseDemo.js"></script>
+    <script src="TeacherAssistant.js"></script>
     <title>Employees</title>
 </head>
 
@@ -17,22 +17,22 @@
     <div ng-controller='employeeCtrl'>
 
         <div class="page-header">
-            <h1>Employee Roster <small>My Single Page<strong> A</strong>ngular.js Client and <strong>F</strong>irebase Back-end App</small></h1>
+            <h1>Teacher Assistant <small>ISTM6215 Project <strong> H</strong>uman  <strong>C</strong>omputer Interaction</small></h1>
         </div>
 
 
-        <h3>Selected Employee: <small>{{employeeName}} </small> </h3>
+        <h3>Selected User: <small>{{employeeName}} </small> </h3>
         
         
      <br>
 
         <div>
 
-            <label>Employee Name</label>
+            <label>User Name</label>
             <input type='text' id='employeeName' ng-model='employeeName'>
             <br>
 
-            <label>Employee Age</label>
+            <label>User Age</label>
             <input type='text' id='employeeAge' ng-model='employeeAge'>
             <br>
 
@@ -52,7 +52,7 @@
             <table class='table table-bordered'>
 
                 <thead>
-                    <th>Employee Name</th>
+                    <th>User Name</th>
                     <th> Age</th>
                     <th>Action</th>
 
@@ -98,7 +98,7 @@
     <div ng-controller="ChatCtrl">
         
           <form ng-submit="addMessage()">
-            <label>Employee Message</label>
+            <label>User Message</label>
             <input type="text" ng-model="message">
             <input type="submit" value="Add Message" class='btn btn-default'>
         </form>
