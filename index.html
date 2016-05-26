@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app='myApp'>
+
+<head>
+    <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    <script src="AngularFirebaseDemo.js"></script>
+    <title>Employees</title>
+</head>
+
+<body style='margin:100px'>
+
+    <div ng-controller='employeeCtrl'>
+
+        <div class="page-header">
+            <h1>Employee Roster <small>My Single Page<strong> A</strong>ngular.js Client and <strong>F</strong>irebase Back-end App</small></h1>
+        </div>
+
+
+        <h3>Selected Employee: <small>{{employeeName}} </small> </h3>
+        
+        
+     <br>
+
+        <div>
+
+            <label>Employee Name</label>
+            <input type='text' id='employeeName' ng-model='employeeName'>
+            <br>
+
+            <label>Employee Age</label>
+            <input type='text' id='employeeAge' ng-model='employeeAge'>
+            <br>
+
+
+        </div>
+
+        <div>
+
+            <button class='btn btn-default' ng-click='saveEmployee()'>
+                Save <span class='glyphicon glyphicon-ok'></span></button>
+
+        </div>
+
+        <br>
+
+        <div>
+            <table class='table table-bordered'>
+
+                <thead>
+                    <th>Employee Name</th>
+                    <th> Age</th>
+                    <th>Action</th>
+
+                </thead>
+                <tbody ng-repeat="employee in employees">
+
+                    <tr>
+                        <td>
+                            <input type='text' value="{{employee.employeeName}}" disabled>
+                        </td>
+                        <td>
+                            <input type='text' ng-model="employee.employeeAge">
+                        </td>
+
+                        <td>
+                            <button class='btn btn-default' ng-click='chooseEmployee(employee)'>
+                                Choose <span class='glyphicon glyphicon-ok'></span></button>
+
+                            <button class='btn btn-default' ng-click='updateEmployee(employee)'>
+                                Update <span class='glyphicon glyphicon-ok'></span></button>
+                            <button class='btn btn-default' ng-click='deleteEmployee(employee.employeeName)'>
+                                Delete <span class='glyphicon glyphicon-ok'></span></button>
+
+
+
+                        </td>
+
+
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+    </div>
+
+    <br>
+    
+    <div ng-controller="ChatCtrl">
+        
+          <form ng-submit="addMessage()">
+            <label>Employee Message</label>
+            <input type="text" ng-model="message">
+            <input type="submit" value="Add Message" class='btn btn-default'>
+        </form>
+        
+        
+        
+        <ul class="chatbox">
+            <li ng-repeat="message in messages"><strong>{{ message.from }} </strong>: {{ message.content }} -
+            
+            {{ message.timestamp }}
+            </li>
+        </ul>
+      
+    </div>
+
+
+
+</body>
+
+</html>
