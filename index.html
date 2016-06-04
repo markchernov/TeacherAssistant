@@ -3,117 +3,401 @@
 
 <head>
     <meta charset="utf-8" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <script src="TeacherAssistant.js"></script>
-    <title>Employees</title>
+    <title>Teacher Assistant</title>
 </head>
 
-<body style='margin:100px'>
+<body>
 
-    <div ng-controller='employeeCtrl'>
+    <div class="container">
 
-        <div class="page-header">
-            <h1>Teacher Assistant <small>ISTM6215 Project <strong> H</strong>uman  <strong>C</strong>omputer Interaction</small></h1>
+        <div ng-controller='employeeCtrl'>
+
+            <div class="page-header">
+                <h1>Teacher Assistant <small>ISTM6215 Project <strong> H</strong>uman  <strong>C</strong>omputer Interaction</small></h1>
+            </div>
+
+
+
+
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <h4><small>1</small></h4>
+                        <span ng-if="selectedUser==null" class="animate-if">   
+                           Select Student                    
+                       </span> {{studentName}}
+                        <span class="caret"></span>
+
+                    </button>
+
+                    <ul class="dropdown-menu">
+
+                        <form name="loginForm" class="form-inline">
+
+                            <li>
+                                <h4>Select User:</h4></li>
+
+                            <li>
+                                <select class="table" size=5 ng-options="x as x.username for x in usersArray" ng-model="selectedUser">
+                                </select>
+
+                            </li>
+
+                            <span ng-show="!selectedUser">
+                        
+                        <li>
+                            <h4>Type Password:</h4></li>
+                        <li>
+                                <input type="text" name='loginPassword' class="form-control" ng-model="loginPassword" required>
+                                <span ng-show="loginForm.loginPassword.$touched && loginForm.loginPassword.$invalid"> 
+                                    <br> The password is required.</span>
+
+                            </li>
+
+                            </span>
+
+                            <li role="separator" class="divider"></li>
+                            <li>
+
+
+
+                                <span ng-show="!selectedUser"> 
+                            
+                            <button type="button" ng-disabled='loginForm.username.$invalid || loginForm.loginPassword.$invalid' class="btn btn-default" ng-click="login()">Login</button></span>
+
+                            </li>
+
+                            <li>
+                                <span ng-show="selectedUser"> 
+                            
+                            <button type="button"  class="btn btn-default" ng-click="logout()">Logout</button></span>
+
+
+                            </li>
+
+
+
+                        </form>
+
+                        <li role="separator" class="divider"></li>
+                        <br>
+                        <h4>Create New User:</h4>
+                        <form name="userForm" class="form-inline">
+                            <li>
+                                <p> User Name:</p>
+                            </li>
+                            <li>
+                                <input type="text" name='username' class="form-control" ng-model="newUserName" required>
+                                <span ng-show="userForm.username.$touched && userForm.username.$invalid"> 
+                                    <br> The name is required.</span>
+
+                            </li>
+                            <li>
+                                <p> Password:</p>
+                            </li>
+                            <li>
+                                <input type="text" name='password' class="form-control" ng-model="newUserPassword" required>
+                                <span ng-show="userForm.password.$touched && userForm.password.$invalid"> 
+                                    <br> The password is required.</span>
+                            </li>
+                        </form>
+
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <button type="button" ng-disabled='userForm.username.$invalid || userForm.password.$invalid' class="btn btn-default" ng-click="createNewUser()">Save New User</button>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="getWishListByUser(); getOthersWishLists()" ng-disabled='selectedUser.username == null'>
+                        <h4><small>2</small></h4> Select WishList <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu">
+
+                        <h4>Select {{selectedUser.username}}'s Wishlist:</h4>
+
+                        <select class="table" size=5 ng-options="x as x.name for x in wishListArray" ng-model="selectedWish">
+                        </select>
+
+                        <br>
+
+                        <h4>Select other's Wishlist:</h4>
+
+                        <select class="table" size=5 ng-options="x as x.name for x in allWishListsArray" ng-model="selectedWish">
+                        </select>
+
+                        <br>
+
+
+                        <h4>Create New Wishlist:</h4>
+                        <form name="wishForm" class="form-inline">
+                            <li>
+                                <p> Name of Wish List:</p>
+                            </li>
+                            <li>
+                                <input type="text" name='wishName' ng-model="name" class="form-control" required>
+                                <span ng-show="wishForm.wishName.$touched && wishForm.wishName.$invalid"> 
+                                    <br> The name is required.</span>
+                            </li>
+                            <li>
+                                <p> Description:</p>
+                            </li>
+                            <li>
+                                <input type="text" name='wishDescription' ng-model="description" class="form-control" required>
+                                <span ng-show="wishForm.wishDescription.$touched && wishForm.wishDescription.$invalid"> 
+                                    <br> The description is required.</span>
+                            </li>
+                        </form>
+
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <button type="button" ng-disabled='wishForm.wishName.$invalid || wishForm.wishDescription.$invalid' class="btn btn-default" ng-click="createWishList()">Save New Wishlist</button>
+                        </li>
+                    </ul>
+
+
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" ng-disabled='selectedUser.username == null || selectedUser.username != selectedWish.user.username' class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <h4><small>3</small></h4> Add Items <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu">
+
+                        <h4>Select Item:</h4>
+
+                        <select class="table" size=5 ng-options="x as x.name for x in itemsArray" ng-model="selectedItem" ng-click="addItemToWishList()">
+                        </select>
+
+                        <br>
+
+                        <h4>Create New Item:</h4>
+                        <form name="itemForm" class="form-inline">
+                            <li>
+                                <p> Item Name:</p>
+                            </li>
+                            <li>
+                                <input type="text" name="itemName" ng-model="itemName" class="form-control" required>
+                                <span ng-show="itemForm.itemName.$touched && itemForm.itemName.$invalid"> 
+                                    <br> The name is required.</span>
+                            </li>
+                            <li>
+                                <p> Description:</p>
+                            </li>
+                            <li>
+                                <input type="text" name="itemDescription" ng-model="itemDescription" class="form-control" required>
+                                <span ng-show="itemForm.itemDescription.$touched && itemForm.itemDescription.$invalid"> 
+                                    <br> The description is required.</span>
+                            </li>
+                        </form>
+
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <button type="button" ng-disabled='itemForm.itemName.$invalid || itemForm.itemDescription.$invalid ' class="btn btn-default" ng-click="createNewItem()">Save New Item</button>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <div class="btn-group" role="group">
+                    <button type="button" ng-disabled='selectedUser.username == null || selectedWish == null' class="btn btn-default" ng-click="updateWishList(); updateUser()">
+                        <h4><small>4</small></h4>Persist Wishlist</button>
+                </div>
+
+
+                <div class="btn-group" role="group">
+
+                    <button type="button" ng-disabled='selectedUser.username != selectedWish.user.username || selectedUser.username == null' class="btn btn-default" ng-click="deleteWishList()">
+                        <h4><small>5</small></h4>Delete Wishlist</button>
+
+
+                </div>
+
+            </div>
+            <!--end buttons group -->
+
+
+
+
+
+
+
+
+
+            <div class="jumbotron">
+
+                <div class="row">
+
+                    <div class="col-md-12">
+
+
+
+
+
+
+
+
+
+
+                        <h3>Selected Student: <small>{{studentName}} </small> </h3>
+
+
+                        <br>
+
+                        <div>
+
+                            <label>Student Name</label>
+                            <input type='text' id='studentName' ng-model='studentName'>
+                            <br>
+
+                            <label>Student Email</label>
+                            <input type='text' id='studentEmail' ng-model='studentEmail'>
+                            <br>
+
+
+                        </div>
+
+                        <div>
+
+                            <button class='btn btn-default' ng-click='saveStudent()'>
+                                Save <span class='glyphicon glyphicon-ok'></span></button>
+
+                        </div>
+
+                        <br>
+
+                        <div>
+                            <table class='table table-bordered'>
+
+                                <thead>
+                                    <th>Student Name</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+
+                                </thead>
+                                <tbody ng-repeat="student in students">
+
+                                    <tr>
+                                        <td>
+                                            <input type='text' value="{{student.studentName}}" disabled>
+                                        </td>
+                                        <td>
+                                            <input type='text' ng-model="student.studentEmail">
+                                        </td>
+
+                                        <td>
+                                            <button class='btn btn-default' ng-click='chooseStudent(student)'>
+                                                Choose <span class='glyphicon glyphicon-ok'></span></button>
+
+                                            <button class='btn btn-default' ng-click='updateStudent(student)'>
+                                                Update <span class='glyphicon glyphicon-ok'></span></button>
+                                            <button class='btn btn-default' ng-click='deleteStudent(student.studentName)'>
+                                                Delete <span class='glyphicon glyphicon-ok'></span></button>
+
+
+
+                                        </td>
+
+
+
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+
+                    </div>
+                    <!--end col-md-row12 1 -->
+
+
+                </div>
+                <!--row 1 -->
+
+
+
+            </div>
+            <!--end Jumbotron 1 -->
+
+
+
+
         </div>
+        <!--end employeeCtrl -->
 
 
-        <h3>Selected User: <small>{{employeeName}} </small> </h3>
-        
-        
-     <br>
-
-        <div>
-
-            <label>User Name</label>
-            <input type='text' id='employeeName' ng-model='employeeName'>
-            <br>
-
-            <label>User Age</label>
-            <input type='text' id='employeeAge' ng-model='employeeAge'>
-            <br>
-
-
-        </div>
-
-        <div>
-
-            <button class='btn btn-default' ng-click='saveEmployee()'>
-                Save <span class='glyphicon glyphicon-ok'></span></button>
-
-        </div>
 
         <br>
 
-        <div>
-            <table class='table table-bordered'>
 
-                <thead>
-                    <th>User Name</th>
-                    <th> Age</th>
-                    <th>Action</th>
+        <div class="jumbotron">
 
-                </thead>
-                <tbody ng-repeat="employee in employees">
+            <div class="row">
 
-                    <tr>
-                        <td>
-                            <input type='text' value="{{employee.employeeName}}" disabled>
-                        </td>
-                        <td>
-                            <input type='text' ng-model="employee.employeeAge">
-                        </td>
-
-                        <td>
-                            <button class='btn btn-default' ng-click='chooseEmployee(employee)'>
-                                Choose <span class='glyphicon glyphicon-ok'></span></button>
-
-                            <button class='btn btn-default' ng-click='updateEmployee(employee)'>
-                                Update <span class='glyphicon glyphicon-ok'></span></button>
-                            <button class='btn btn-default' ng-click='deleteEmployee(employee.employeeName)'>
-                                Delete <span class='glyphicon glyphicon-ok'></span></button>
+                <div class="col-md-12">
 
 
 
-                        </td>
+
+
+                    <div ng-controller="ChatCtrl">
+
+                        <form ng-submit="addMessage()">
+                            <label>Student Message</label>
+                            <input type="text" ng-model="message">
+                            <input type="submit" value="Add Message" class='btn btn-default'>
+                        </form>
 
 
 
-                    </tr>
+                        <ul class="chatbox">
+                            <li ng-repeat="message in messages"><strong>{{ message.from }} </strong>: {{ message.content }} - {{ message.timestamp }}
+                            </li>
+                        </ul>
+
+                    </div>
+                    <!--end ChatCtrl -->
 
 
-                </tbody>
 
-            </table>
+
+                </div>
+                <!--end col-md-12 -->
+
+            </div>
+            <!--end row 2 -->
 
 
         </div>
-    </div>
+        <!--end jumbotron 2-->
 
-    <br>
-    
-    <div ng-controller="ChatCtrl">
-        
-          <form ng-submit="addMessage()">
-            <label>User Message</label>
-            <input type="text" ng-model="message">
-            <input type="submit" value="Add Message" class='btn btn-default'>
-        </form>
-        
-        
-        
-        <ul class="chatbox">
-            <li ng-repeat="message in messages"><strong>{{ message.from }} </strong>: {{ message.content }} -
-            
-            {{ message.timestamp }}
-            </li>
-        </ul>
-      
-    </div>
 
+
+
+
+
+
+
+    </div>
+    <!--end container-->
 
 
 </body>

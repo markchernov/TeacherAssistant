@@ -2,80 +2,80 @@
 var app = angular.module('myApp', ["firebase"]);
 
  /*******************************************************  
-    CONTROLLER FOR EMPLOYEES
+    CONTROLLER FOR Students
   ******************************************************* */
 
 app.controller('employeeCtrl', ["$scope","$rootScope", function ($scope,$rootScope) {
 
     // Assign back end to myData var on the Scope
 
-    $scope.myData = new Firebase('https://glaring-heat-6775.firebaseio.com/Employees');
+    $scope.myData = new Firebase('https://glaring-heat-6775.firebaseio.com/Students');
 
-    $scope.employeeName = '';
-    $scope.employeeAge = null;
-    $scope.employees = {};
+    $scope.studentName = '';
+    $scope.studentEmail = null;
+    $scope.students = {};
 
-    // Persist Employee on click to Firebase
-    $scope.saveEmployee = function () {
+    // Persist student on click to Firebase
+    $scope.saveStudent = function () {
 
-        // Set the key to path https://glaring-heat-6775.firebaseio.com/Employees/empName
-        var empName = $scope.employeeName;
+        // Set the key to path https://glaring-heat-6775.firebaseio.com/Employees/studentName
+        var studentName = $scope.studentName;
 
-        $scope.myData.child(empName).set({
-            employeeName: $scope.employeeName,
-            employeeAge: $scope.employeeAge
+        $scope.myData.child(studentName).set({
+            studentName: $scope.studentName,
+            studentEmail: $scope.studentEmail
         });
 
 
-        $scope.employeeName = '';
-        $scope.employeeAge = null;
+        $scope.studentName = '';
+        $scope.studentEmail = null;
     };
 
-    // Delete Employee on click from Firebase
-    $scope.deleteEmployee = function (employeeName) {
+    // Delete student on click from Firebase
+    $scope.deleteStudent = function (studentName) {
 
-        console.log('Inside deleteEmployee()   ');
-        console.log('employee.employeeName  ');
-        console.log(employeeName);
+        console.log('Inside deleteStudent()   ');
+        console.log('student.studentName  ');
+        console.log(studentName);
 
         /*var currentEmployee = $scope.employees[employeeName];
         console.log('This is employee choosen by employeeName: ');
         console.log(currentEmployee);*/
 
-        // Remove employee by the key at https://glaring-heat-6775.firebaseio.com/Employees/employeeName
-        $scope.myData.child(employeeName).set(null);
-        $scope.employeeName = '';
+        // Remove employee by the key at https://glaring-heat-6775.firebaseio.com/Employees/studentName
+        $scope.myData.child(studentName).set(null);
+        $scope.studentName = '';
         $scope.employeeAge = null;
     };
 
-    // Persist Employee on click to Firebase
-    $scope.updateEmployee = function (employee) {
+    // Persist student on click to Firebase
+    $scope.updateStudent = function (student) {
         
-        console.log('Inside updateEmployee() ');
-        console.log('This is choosen employee: ');
-        console.log(employee);
+        console.log('Inside updateStudent() ');
+        console.log('This is choosen student: ');
+        console.log(student);
 
-        $scope.myData.child(employee.employeeName).update({
-            employeeAge: employee.employeeAge
+        $scope.myData.child(student.studentName).update({
+            studentEmail: student.studentEmail
         });
 
 
-        $scope.employeeName = '';
-        $scope.employeeAge = null;
+        $scope.studentName = '';
+        $scope.studentAge = null;
     };
     
-    // Choose current employee
-    $scope.chooseEmployee = function (employee) {
+    // Choose current student 
+    $scope.chooseStudent = function (student) {
         
-        console.log('Inside chooseEmployee() ');
-        console.log('This is choosen employee: ');
-        console.log(employee);
+        console.log('Inside chooseStudent() ');
+        console.log('This is choosen student: ');
+        console.log(student);
         
-        $scope.employeeName = employee.employeeName;
-        $scope.employeeAge = employee.employeeAge;
+        $scope.studentName = student.studentName;
+        $scope.studentEmail = student.studentEmail;
 
-        $rootScope.employeeName = employee.employeeName;
-        $rootScope.employeeAge = employee.employeeAge;
+        $rootScope.studentName = student.studentName;
+        $rootScope.studentEmail = student.studentEmail;
       
     };
     
@@ -83,10 +83,10 @@ app.controller('employeeCtrl', ["$scope","$rootScope", function ($scope,$rootSco
     // Event listener for changes in Firebase data model
     $scope.myData.on('value', function (snapshot) {
 
-        $scope.employees = snapshot.val();
+        $scope.students = snapshot.val();
 
-        console.log('This is $scope.employees after trigger: ');
-        console.log($scope.employees);
+        console.log('This is $scope.students after trigger: ');
+        console.log($scope.students);
 
 
     });
@@ -133,7 +133,7 @@ app.controller("ChatCtrl", ["$scope","$rootScope", "chatMessages",
         
         
       $scope.messages.$add({
-        from: $rootScope.employeeName,
+        from: $rootScope.studentName,
         content: $scope.message,
         timestamp: timestamp 
       });
