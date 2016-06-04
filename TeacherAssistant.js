@@ -2,49 +2,231 @@
 var app = angular.module('myApp', ["firebase"]);
 
  /*******************************************************  
-    CONTROLLER FOR Students
+    CONTROLLER FOR APP
   ******************************************************* */
 
-app.controller('employeeCtrl', ["$scope","$rootScope", function ($scope,$rootScope) {
+app.controller('studentCtrl', ["$scope", "chatMessages", function ($scope, chatMessages) {
+    
+    
+    /*******************************************************  
+    MENU METHODS
+  ******************************************************* */ 
+    
+    
+    
+   /* MAIN Panel*/
+    
+    $scope.IsMainPanelVisible = true;
+    
+    $scope.IsStudentsPanelVisible = false;
+    // Function to show or hide div
+    $scope.ShowStudentsPanel = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsStudentsPanelVisible = $scope.IsStudentsMenuVisible ? false : true;
+                 $scope.IsMainPanelVisible = false;
+                 $scope.userTypeStudent = true;
+                 $scope.userTypeTeacher = false;
+        
+        
+            };
+    
+    
+    $scope.IsTeachersPanelVisible = false;
+    // Function to show or hide div
+    $scope.ShowTeachersPanel = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsTeachersPanelVisible = $scope.IsStudentsMenuVisible ? false : true;
+                $scope.IsMainPanelVisible = false;
+                $scope.userTypeTeacher = true;
+                $scope.userTypeStudent = false;
+        
+            };
+    
+    
+    
+    
+    
+    
+    /* STUDENT OR TEACHER Panel*/
+    
+    
+    
+    
+    $scope.IsStudentMenuVisible = false;
+    // Function to show or hide div
+    $scope.ShowHideStudents = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsStudentMenuVisible = $scope.IsStudentsMenuVisible ? false : true;
+        
+                $scope.IsStudentQuestionsMenuVisible = false;
+        
+                $scope.IsStudentMessagesMenuVisible = false;
+        
+            };
+    
+    
+    $scope.IsTeacherMenuVisible = false;
+    // Function to show or hide div
+    $scope.ShowHideTeachers = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsTeacherMenuVisible = $scope.IsTeachersMenuVisible ? false : true;
+        
+                $scope.IsTeacherQuestionsMenuVisible = false;
+        
+                $scope.IsTeacherMessagesMenuVisible = false;
+        
+            };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    $scope.IsStudentQuestionsMenuVisible = false;
+    // Function to show or hide div
+    $scope.ShowHideStudentQuestions = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsStudentQuestionsMenuVisible = $scope.IsQuestionsMenuVisible ? false : true;
+        
+                $scope.IsStudentMenuVisible = false;
+        
+                $scope.IsStudentMessagesMenuVisible =  false;
+        
+            };
+    
+    
+    
+      $scope.IsTeacherQuestionsMenuVisible = false;
+    // Function to show or hide div
+    $scope.ShowHideTeacherQuestions = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsTeacherQuestionsMenuVisible = $scope.IsQuestionsMenuVisible ? false : true;
+        
+                $scope.IsTeacherMenuVisible = false;
+        
+                $scope.IsTeacherMessagesMenuVisible =  false;
+        
+            };
+      
+       $scope.IsStudentMessagesMenuVisible = false;
+    // Function to show or hide div
+    $scope.ShowHideStudentMessages = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsStudentMessagesMenuVisible = $scope.IsMessagesMenuVisible ? false : true;
+        
+                $scope.IsStudentMenuVisible =  false;
+        
+                $scope.IsStudentQuestionsMenuVisible = false;
+        
+            };
+    
+    
+    
+      
+       $scope.IsTeacherMessagesMenuVisible = false;
+    // Function to show or hide div
+    $scope.ShowHideTeacherMessages = function () {
+                //If DIV is visible it will be hidden and vice versa.
+                $scope.IsTeacherMessagesMenuVisible = $scope.IsMessagesMenuVisible ? false : true;
+        
+                $scope.IsTeacherMenuVisible =  false;
+        
+                $scope.IsTeacherQuestionsMenuVisible = false;
+        
+            };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    // Log out user on click 
+    $scope.LogOut = function () {
 
-    // Assign back end to myData var on the Scope
+        $scope.studentId = null;
+        $scope.studentName = null;
+        $scope.studentEmail = null;
+        
+        
+        $scope.teacherId = null;
+        $scope.teacherName = null;
+        $scope.teacherEmail = null;
+        
+        $scope.userTypeTeacher = false;
+        $scope.userTypeStudent = false;
+        
+        
+        window.location = "http://markche.com/TeacherAssistant/"; 
+        
+        
+    };
 
-    $scope.myData = new Firebase('https://glaring-heat-6775.firebaseio.com/Students');
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /*******************************************************  
+    STUDENTS METHODS
+  ******************************************************* */ 
+    
+    
+    
+    
 
-    $scope.studentName = '';
+    // Assign back end to myStudentData var on the Scope
+
+    $scope.myStudentData = new Firebase('https://glaring-heat-6775.firebaseio.com/Students');   
+    
+    $scope.studentId = null;
+    $scope.studentName = null;
     $scope.studentEmail = null;
     $scope.students = {};
 
     // Persist student on click to Firebase
     $scope.saveStudent = function () {
 
-        // Set the key to path https://glaring-heat-6775.firebaseio.com/Employees/studentName
-        var studentName = $scope.studentName;
+        // Set the key to path https://glaring-heat-6775.firebaseio.com/Students/studentId
+        var studentId = $scope.studentId;
 
-        $scope.myData.child(studentName).set({
+        $scope.myStudentData.child(studentId).set({
+            studentId: $scope.studentId,
             studentName: $scope.studentName,
             studentEmail: $scope.studentEmail
         });
 
-
-        $scope.studentName = '';
+        $scope.studentId = null;
+        $scope.studentName = null;
         $scope.studentEmail = null;
     };
 
     // Delete student on click from Firebase
-    $scope.deleteStudent = function (studentName) {
+    $scope.deleteStudent = function (studentId) {
 
         console.log('Inside deleteStudent()   ');
         console.log('student.studentName  ');
-        console.log(studentName);
+        console.log(studentId);
 
-        /*var currentEmployee = $scope.employees[employeeName];
-        console.log('This is employee choosen by employeeName: ');
-        console.log(currentEmployee);*/
-
-        // Remove employee by the key at https://glaring-heat-6775.firebaseio.com/Employees/studentName
-        $scope.myData.child(studentName).set(null);
-        $scope.studentName = '';
+        // Remove student by the key at https://glaring-heat-6775.firebaseio.com/Students/studentId
+        $scope.myStudentData.child(studentId).set(null);
+        $scope.studentId = null;
+        $scope.studentName = null;
         $scope.employeeAge = null;
     };
 
@@ -55,13 +237,14 @@ app.controller('employeeCtrl', ["$scope","$rootScope", function ($scope,$rootSco
         console.log('This is choosen student: ');
         console.log(student);
 
-        $scope.myData.child(student.studentName).update({
+        $scope.myStudentData.child(student.studentId).update({
+            studentName: student.studentName,
             studentEmail: student.studentEmail
         });
 
-
-        $scope.studentName = '';
-        $scope.studentAge = null;
+        $scope.studentId = null;
+        $scope.studentName = null;
+        $scope.studentEmail = null;
     };
     
     // Choose current student 
@@ -71,17 +254,16 @@ app.controller('employeeCtrl', ["$scope","$rootScope", function ($scope,$rootSco
         console.log('This is choosen student: ');
         console.log(student);
         
+        $scope.studentId = student.studentId;
         $scope.studentName = student.studentName;
         $scope.studentEmail = student.studentEmail;
 
-        $rootScope.studentName = student.studentName;
-        $rootScope.studentEmail = student.studentEmail;
       
     };
     
 
     // Event listener for changes in Firebase data model
-    $scope.myData.on('value', function (snapshot) {
+    $scope.myStudentData.on('value', function (snapshot) {
 
         $scope.students = snapshot.val();
 
@@ -90,32 +272,221 @@ app.controller('employeeCtrl', ["$scope","$rootScope", function ($scope,$rootSco
 
 
     });
+    
+    
+    
+    
+    
+    /*******************************************************  
+    TEACHERS METHODS
+  ******************************************************* */ 
+    
+    
+    
+    
 
-}]);
+    // Assign back end to myTeacherData var on the Scope
+
+    $scope.myTeacherData = new Firebase('https://glaring-heat-6775.firebaseio.com/Teachers');
+
+    
+      
+    
+    $scope.teacherId = null;
+    $scope.teacherName = null;
+    $scope.teacherEmail = null;
+    $scope.teachers = {};
+
+    // Persist teacher on click to Firebase
+    $scope.saveTeacher = function () {
+
+        // Set the key to path https://glaring-heat-6775.firebaseio.com/Teachers/teacherId
+        var teacherId = $scope.teacherId;
+
+        $scope.myTeacherData.child(teacherId).set({
+            teacherId: $scope.teacherId,
+            teacherName: $scope.teacherName,
+            teacherEmail: $scope.teacherEmail
+        });
+
+        $scope.teacherId = null;
+        $scope.teacherName = null;
+        $scope.teacherEmail = null;
+    };
+
+    // Delete teacher on click from Firebase
+    $scope.deleteTeacher = function (teacherId) {
+
+        console.log('Inside deleteTeacher()   ');
+        console.log('teacher.teacherName  ');
+        console.log(teacherId);
+
+        // Remove teacher by the key at https://glaring-heat-6775.firebaseio.com/Teachers/teacherId
+        $scope.myTeacherData.child(teacherId).set(null);
+        $scope.teacherId = null;
+        $scope.teacherName = null;
+        $scope.teacherAge = null;
+    };
+
+    // Persist teacher on click to Firebase
+    $scope.updateTeacher = function (student) {
+        
+        console.log('Inside updateTeacher() ');
+        console.log('This is choosen teacher: ');
+        console.log(teacher);
+
+        $scope.myTeacherData.child(teacher.teacherId).update({
+            teacherName: teacher.teacherName,
+            teacherEmail: teacher.teacherEmail
+        });
+
+        $scope.teacherId = null;
+        $scope.teacherName = null;
+        $scope.teacherEmail = null;
+    };
+    
+    // Choose current student 
+    $scope.chooseTeacher = function (teacher) {
+        
+        console.log('Inside chooseTeacher() ');
+        console.log('This is choosen teacher: ');
+        console.log(teacher);
+        
+        $scope.teacherId = teacher.teacherId;
+        $scope.teacherName = teacher.teacherName;
+        $scope.teacherEmail = teacher.teacherEmail;
+
+      
+    };
+    
+
+    // Event listener for changes in Firebase data model
+    $scope.myTeacherData.on('value', function (snapshot) {
+
+        $scope.teachers = snapshot.val();
+
+        console.log('This is $scope.teachers after trigger: ');
+        console.log($scope.teachers);
 
 
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    /*******************************************************  
+    QUESTIONS METHODS
+  ******************************************************* */ 
+    
+    
+     
+    // Assign back end to myQuestionsData var on the Scope
+
+    $scope.myQuestionData = new Firebase('https://glaring-heat-6775.firebaseio.com/Questions');
+ 
+        
+    $scope.questionNumber = null;
+    $scope.questionDetails = null;
+    $scope.questions = {};
+
+    // Persist question on click to Firebase
+    $scope.saveQuestion = function () {
+
+        // Set the key to path https://glaring-heat-6775.firebaseio.com/Students/studentId
+        var questionNumber = $scope.questionNumber;
+
+        $scope.myQuestionData.child(questionNumber).set({
+            questionNumber: $scope.questionNumber,
+            questionDetails: $scope.questionDetails,
+            
+        });
+
+        $scope.questionNumber = null;
+        $scope.questionDetails = null;
+    };
+
+    // Delete question on click from Firebase
+    $scope.deleteQuestion = function (questionNumber) {
+
+        console.log('Inside deleteQuestion()   ');
+        console.log('question.questionNumber  ');
+        console.log(questionNumber);
+
+        // Remove student by the key at https://glaring-heat-6775.firebaseio.com/Students/studentId
+        $scope.myStudentData.child(studentId).set(null);
+        $scope.studentId = null;
+        $scope.studentName = null;
+        $scope.employeeAge = null;
+    };
+
+    // Persist question on click to Firebase
+    $scope.updateStudent = function (student) {
+        
+        console.log('Inside updateStudent() ');
+        console.log('This is choosen student: ');
+        console.log(student);
+
+        $scope.myStudentData.child(question.questionNumber).update({
+            questionNumber: question.questionNumber,
+            questionDetails: question.questionDetails
+        });
+
+        $scope.questionNumber = null;
+        $scope.questionDetails = null;
+       
+    };
+    
+    // Choose current question 
+    $scope.chooseQuestion = function (question) {
+        
+        console.log('Inside chooseQuestion() ');
+        console.log('This is choosen question: ');
+        console.log(question);
+        
+        $scope.questionNumber = question.questionNumber;
+        $scope.questionDetails = question.questionDetails;
+
+      
+    };
+    
+
+    // Event listener for changes in Firebase data model
+    $scope.myQuestionData.on('value', function (snapshot) {
+
+        $scope.questions = snapshot.val();
+
+        console.log('This is $scope.questions after trigger: ');
+        console.log($scope.questions);
+
+
+    });
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 /*******************************************************  
-    CONTROLLER FOR MESSAGES
-  ******************************************************* */
+    MESSAGESS METHODS
+  ******************************************************* */ 
+    
 
 
-
-
-// this factory returns a synchronized array of chat messages
-app.factory("chatMessages", ["$firebaseArray",
-  function($firebaseArray) {
-   
-    var ref = new Firebase('https://glaring-heat-6775.firebaseio.com/Messages/');
-
-    // this uses AngularFire to create the synchronized array
-    return $firebaseArray(ref);
-  }
-]);
-
-app.controller("ChatCtrl", ["$scope","$rootScope", "chatMessages", 
-  //  pass chatMessages factory into the controller
-  function($scope, $rootScope, chatMessages) {
                        
     // we add chatMessages array to the scope to be used in our ng-repeat
     $scope.messages = chatMessages;
@@ -133,7 +504,7 @@ app.controller("ChatCtrl", ["$scope","$rootScope", "chatMessages",
         
         
       $scope.messages.$add({
-        from: $rootScope.studentName,
+        from: $scope.studentName || $scope.teacherName,
         content: $scope.message,
         timestamp: timestamp 
       });
@@ -156,5 +527,20 @@ app.controller("ChatCtrl", ["$scope","$rootScope", "chatMessages",
         });
       }
     });
+      
+ 
+        
+      
+  
+    }]);
+
+// this factory returns a synchronized array of chat messages
+app.factory("chatMessages", ["$firebaseArray",
+  function($firebaseArray) {
+   
+    var ref = new Firebase('https://glaring-heat-6775.firebaseio.com/Messages/');
+
+    // this uses AngularFire to create the synchronized array
+    return $firebaseArray(ref);
   }
 ]);
