@@ -417,18 +417,18 @@ app.controller('studentCtrl', ["$scope", "chatMessages", function ($scope, chatM
         console.log(questionNumber);
 
         // Remove student by the key at https://glaring-heat-6775.firebaseio.com/Students/studentId
-        $scope.myStudentData.child(studentId).set(null);
-        $scope.studentId = null;
-        $scope.studentName = null;
-        $scope.employeeAge = null;
+        $scope.myQuestionData.child(questionNumber).set(null);
+        $scope.questionNumber = null;
+        $scope.questionDetails = null;
+        
     };
 
     // Persist question on click to Firebase
-    $scope.updateStudent = function (student) {
+    $scope.updateQuestion = function (question) {
         
-        console.log('Inside updateStudent() ');
-        console.log('This is choosen student: ');
-        console.log(student);
+        console.log('Inside updateQuestion() ');
+        console.log('This is choosen question: ');
+        console.log(question);
 
         $scope.myStudentData.child(question.questionNumber).update({
             questionNumber: question.questionNumber,
