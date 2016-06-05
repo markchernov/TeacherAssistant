@@ -391,11 +391,11 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     // Assign back end to myQuestionsData var on the Scope
 
     $scope.myQuestionData = new Firebase('https://glaring-heat-6775.firebaseio.com/Questions');
- 
-        
+    
     $scope.questionNumber = null;
     $scope.questionDetails = null;
     $scope.questions = {};
+   
 
     // Persist question on click to Firebase
     $scope.saveQuestion = function () {
@@ -406,6 +406,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
         $scope.myQuestionData.child(questionNumber).set({
             questionNumber: $scope.questionNumber,
             questionDetails: $scope.questionDetails,
+            
             
         });
 
@@ -434,7 +435,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
         console.log('This is choosen question: ');
         console.log(question);
 
-        $scope.myStudentData.child(question.questionNumber).update({
+        $scope.myQuestionData.child(question.questionNumber).update({
             questionNumber: question.questionNumber,
             questionDetails: question.questionDetails
         });
@@ -451,8 +452,10 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
         console.log('This is choosen question: ');
         console.log(question);
         
+        $scope.choosenQuestion = question;
         $scope.questionNumber = question.questionNumber;
         $scope.questionDetails = question.questionDetails;
+        $scope.studentsAnswers = question.studentsAnswers;
 
       
     };
@@ -471,9 +474,160 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     
     
     
+    /*******************************************************  
+    ANSWERS METHODS
+  ******************************************************* */ 
+    
+    
+     
+    // Assign back end to myQuestionsData var on the Scope
+
+    $scope.myAnswerData = new Firebase('https://glaring-heat-6775.firebaseio.com/Answers');
+    
+    $scope.myStudentAnswerData = new Firebase('https://glaring-heat-6775.firebaseio.com/StudentAnswer');
+ 
+ 
+        
+    $scope.answerNumber = null;
+    $scope.answerDetails = null;    
+    $scope.answers = {};
+
+    // Persist question on click to Firebase
+    $scope.saveAnswer = function () {
+
+        // Set the key to path https://glaring-heat-6775.firebaseio.com/Students/studentId
+        var answerNumber = $scope.answerNumber;
+
+        $scope.myAnswerData.child(answerNumber).set({
+            questionNumber: $scope.questionNumber,
+            answerNumber: $scope.answerNumber,
+            answerDetails: $scope.answerDetails,
+            
+        });
+
+        $scope.answerNumber = null;
+        $scope.answerDetails = null;
+    };
+
+    // Delete question on click from Firebase
+    $scope.deleteQuestion = function (answerNumber) {
+
+        console.log('Inside deleteAnswer()   ');
+        console.log('answer.answerNumber  ');
+        console.log(answerNumber);
+
+        // Remove question by the key at https://glaring-heat-6775.firebaseio.com/Students/studentId
+        $scope.myAnswerData.child(answerNumber).set(null);
+        $scope.answerNumber = null;
+        $scope.answerDetails = null;
+        
+    };
+
+    // Persist question on click to Firebase
+    $scope.updateAnswer = function (answer) {
+        
+        console.log('Inside updateAnswer() ');
+        console.log('This is choosen answer: ');
+        console.log(answer);
+
+        $scope.myAnswerData.child(question.answerNumber).update({
+            answerNumber: answer.questionNumber,
+            answerDetails: answer.questionDetails
+        });
+
+        $scope.answerNumber = null;
+        $scope.answerDetails = null;
+       
+    };
+    
+    // Choose current question 
+    $scope.chooseAnswer = function (answer) {
+        
+        console.log('Inside chooseAnswer() ');
+        console.log('This is choosen answer: ');
+        console.log(answer);
+        
+        $scope.answerNumber = answer.answerNumber;
+        $scope.answerDetails = answer.answerDetails;
+        $scope.choosenAnswer = answer;
+
+      
+    };
+    
+
+    // save choosen answer 
+    $scope.saveChoosenAnswer = function (choosenAnswer) {
+        
+        console.log('Inside saveChoosenAnswer() ');
+        console.log('This is choosen answer to save: ');
+        console.log(choosenAnswer);
+        
+        /*$scope.answerNumber = answer.answerNumber;
+        $scope.answerDetails = answer.answerDetails;*/
+        
+        $scope.choosenAnswer.studentId = $scope.studentId;
+        $scope.choosenAnswer.studentName = $scope.studentName;
+        $scope.choosenAnswer.timeStamp = new Date().toString();
+        
+        
+       /* var answersObject = $scope.choosenQuestion.studentsAnswers;
+          
+        var choosenAnswer = $scope.choosenAnswer;
+             
+        answersObject.choosenAnswer;*/
+        
+        console.log('This is answersObject: ');
+        console.log($scope.choosenAnswer);
+        
+         
+        $scope.myStudentAnswerData.push($scope.choosenAnswer);
+        
+           
+    };
+    
+    
+    // Display statistics based on students answers 
+    $scope.displayResults = function (questionId) {
+        
+        console.log('Inside displayAnswers() ');
+        console.log('This is questionId to display: ');
+        console.log(questionId);
+        
+   
+       // TODO:   Calculate sttistics based on students answers
+        
+        
+        
+    };
     
     
     
+    
+    
+    
+    
+    // Event listener for changes in Firebase data model
+    $scope.myAnswerData.on('value', function (snapshot) {
+
+        $scope.answers = snapshot.val();
+
+        console.log('This is $scope.answers after trigger: ');
+        console.log($scope.answers);
+
+
+    });
+    
+    
+       // Event listener for changes in Firebase data model
+    $scope.myStudentAnswerData.on('value', function (snapshot) {
+
+        $scope.studentAnswers = snapshot.val();
+
+        console.log('This is $scope.studentAnswers after trigger: ');
+        console.log($scope.studentAnswers);
+
+
+    });
     
     
     
@@ -508,7 +662,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
         
         
       $scope.messages.$add({
-        from: $scope.studentName || $scope.teacherName,
+        from:  $scope.studentName || $scope.teacherName,
         content: $scope.message,
         timestamp: timestamp 
       });

@@ -46,15 +46,15 @@
                        <h4><small>STUDENTS</small></h4>  
 
                          <span class='glyphicon glyphicon-user'> </span>
-           
+
             </button>
 
         </div>
 
         <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default "  ng-click="ShowTeachersPanel()">
-               <h4><small>TEACHERS</small></h4>
-                 <span class='glyphicon glyphicon-user'> </span>
+            <button type="button" class="btn btn-default " ng-click="ShowTeachersPanel()">
+                <h4><small>TEACHERS</small></h4>
+                <span class='glyphicon glyphicon-user'> </span>
             </button>
 
 
@@ -63,9 +63,9 @@
 
     </div>
 
-                <!--<img src="http://www.gotthetahealing.com/attachments/Image/website/top_teacher_assistant_hat-p148601626706409662qz14_400.jpg" alt="Teacher Assistant" style="width:400px;height:400px;" style="float:center">-->
-               
-                
+    <!--<img src="http://www.gotthetahealing.com/attachments/Image/website/top_teacher_assistant_hat-p148601626706409662qz14_400.jpg" alt="Teacher Assistant" style="width:400px;height:400px;" style="float:center">-->
+
+
 
 
     </span>
@@ -232,30 +232,22 @@
                     <th>Student Id</th>
                     <th>Student Name</th>
                     <th>Email</th>
-                    <th>Action</th>
-
                 </thead>
                 <tbody ng-repeat="student in students">
 
                     <tr>
                         
                          <td>
-                            <input type='text' value="{{student.studentId}}" disabled>
-                        </td>
-                        <td>
-                            <input type='text' value="{{student.studentName}}" >
-                        </td>
-                        <td>
-                            <input type='text' ng-model="student.studentEmail">
-                        </td>
-
-                        <td>
-                            <button class='btn btn-default' ng-click='chooseStudent(student)'>
-                                Select <span class='glyphicon glyphicon-ok'></span></button>
-
-                         </td>
-
-
+                             <button class='btn btn-default' ng-click='chooseStudent(student)'>
+                            Select <span class='glyphicon glyphicon-ok'></span></button>
+    {{student.studentId}}
+    </td>
+    <td>
+        {{student.studentName}}
+    </td>
+    <td>
+        {{student.studentEmail}}
+    </td>
 
     </tr>
 
@@ -310,32 +302,19 @@
             <thead>
                 <th>Question Number</th>
                 <th>Question Details</th>
-                <th>Action</th>
-
+    
             </thead>
             <tbody ng-repeat="question in questions">
 
                 <tr>
                     <td>
-                        <input type='text' value="{{question.questionNumber}}" disabled>
-                    </td>
-                    <td>
-                        <input type='text' ng-model="question.questionDetails">
-                    </td>
-
-                    <td>
                         <button class='btn btn-default' ng-click='chooseQuestion(question)'>
-                            Choose <span class='glyphicon glyphicon-ok'></span></button>
-
-   <!-- <button class='btn btn-default' ng-click='updateQuestion(question)'>
-        Update <span class='glyphicon glyphicon-ok'></span></button>
-    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
-        Delete <span class='glyphicon glyphicon-ok'></span></button>-->
-
-
-
+                        Choose <span class='glyphicon glyphicon-ok'></span></button>
+    {{question.questionNumber}}
     </td>
-
+    <td>
+        {{question.questionDetails}}
+    </td>
 
 
     </tr>
@@ -345,93 +324,50 @@
 
     </table>
 
-
-        
-          <br>
-
-    
-        <h3>Selected Answer: </h3>               
-                        
-                        
-        <table class='table table-bordered'>
-
-            <thead>
-                <th>Answer Number</th>
-                <th>Answer Details</th>
-                <th>Action</th>
-
-            </thead>
-            <tbody ng-repeat="answer in answerss">
-
-                <tr>
-                    <td>
-                        <input type='text' value="{{answer.answerNumber}}" disabled>
-                    </td>
-                    <td>
-                        <input type='text' ng-model="answer.answerDetails">
-                    </td>
-
-                    <td>
-                        <button class='btn btn-default' ng-click='chooseAnswer(answer)'>
-                            Choose <span class='glyphicon glyphicon-ok'></span></button>
-
-   <!-- <button class='btn btn-default' ng-click='updateQuestion(question)'>
-        Update <span class='glyphicon glyphicon-ok'></span></button>
-    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
-        Delete <span class='glyphicon glyphicon-ok'></span></button>-->
-
-
-
-    </td>
-
-
-
-    </tr>
-
-
-    </tbody>
-
-    </table>
-        
-        
-        
-        
-        
-        
-        
-        
-        
 
 
     <br>
 
 
-<!--    <h3>Create New Question: </h3>
-
-    <div>
-
-        <label>Question Number</label>
-        <input type='text' id='questionNumber' ng-model='questionNumber'>
-        <br>
-
-        <label>Question Details</label>
-        <input type='text' id='questionDetails' ng-model='questionDetails'>
-        <br>
+    <h3>Selected Answer: <small>{{answerDetails}} </small> 
+                            
+                            <span ng-show="answerDetails"> <button class='btn btn-default' ng-click='saveChoosenAnswer(choosenAnswer)'>
+                            Submit <span class='glyphicon glyphicon-ok'></span></button>  </span> 
+                            
+                        </h3>
 
 
-    </div>
+    <table class='table table-bordered'>
 
-    <div>
+        <thead>
+            <th>Answer Number</th>
+            <th>Answer Details</th>
 
-        <button class='btn btn-default' ng-click='saveQuestion()'>
-            Save <span class='glyphicon glyphicon-ok'></span></button>
+        </thead>
+        <tbody ng-repeat="answer in answers" ng-if="answer.questionNumber == questionNumber">
 
-    </div>-->
+            <tr>
+                <td>
+                    <button class='btn btn-default' ng-click='chooseAnswer(answer)'>
+                        Choose <span class='glyphicon glyphicon-ok'></span></button>
+                    {{answer.answerNumber}}
+                </td>
+                <td>
+                    {{answer.answerDetails}}
+                </td>
+
+            </tr>
+
+
+        </tbody>
+
+    </table>
 
 
 
 
-    
+    <br>
+
 
 
     </div>
@@ -463,7 +399,7 @@
 
 
                         <form ng-submit="addMessage()">
-                            <label>Student Message</label>
+                            <h3>Student Message</h3>
                             <input type="text" ng-model="message">
                             <input type="submit" value="Add Message" class='btn btn-default'>
                         </form>
@@ -488,7 +424,8 @@
         </span>
     <!--end show span-->
 
-    </span>     <!--end show options when userType is Student-->
+    </span>
+    <!--end show options when userType is Student-->
 
     <!--
              /*******************************************************  
@@ -596,7 +533,7 @@
     </div>
 
 
-          <br>
+    <br>
 
 
     <h3>Create New Student: </h3>
@@ -623,10 +560,10 @@
         <button class='btn btn-default' ng-click='saveStudent()'>
             Save <span class='glyphicon glyphicon-ok'></span></button>
 
-    </div>      
-            
-            
-            
+    </div>
+
+
+
 
 
     </div>
@@ -644,9 +581,9 @@
     </div>
     <!--end Jumbotron 1 -->
 
-    
 
-        </span>
+
+    </span>
 
 
 
@@ -661,37 +598,81 @@
                     <div class="col-md-12">
 
 
-                        <h3>Selected Question: <small>{{questionDetails}} </small> </h3>
+                        <h3>Selected Question: <small>{{questionDetails}} </small> 
+                        
+                        <span ng-show="questionDetails"> <button class='btn btn-default' ng-click='displayAnswers(questionNumber)'>
+                            Statistics <span class='glyphicon glyphicon-ok'></span></button>
+    </span>
 
 
-        
+    </h3>
+
     <br>
 
-  
-        <table class='table table-bordered'>
 
-            <thead>
-                <th>Question Number</th>
-                <th>Question Details</th>
-                <th>Action</th>
+    <span ng-show="questionNumber">                   
+                        
+                        
+     <h3>Student Answers for: <small>{{questionNumber}} </small> </h3>
 
-            </thead>
-            <tbody ng-repeat="question in questions">
 
-                <tr>
-                    <td>
-                        <input type='text' value="{{question.questionNumber}}" disabled>
-                    </td>
-                    <td>
-                        <input type='text' ng-model="question.questionDetails">
-                    </td>
+    <table class='table table-bordered'>
 
-                    <td>
-                        <button class='btn btn-default' ng-click='chooseQuestion(question)'>
-                            Choose <span class='glyphicon glyphicon-ok'></span></button>
+        <thead>
+            <th>Answer Number</th>
+            <th>Student Name</th>
+            <th>Answer Date</th>
 
-    <button class='btn btn-default' ng-click='updateQuestion(question)'>
-        Update <span class='glyphicon glyphicon-ok'></span></button>
+        </thead>
+        <tbody ng-repeat="answer in studentAnswers" ng-if="answer.questionNumber == questionNumber">
+
+            <tr>
+                <td>
+                    {{answer.answerNumber}}
+                </td>
+
+                <td>
+                   {{answer.studentName}}
+                </td>
+
+                <td>
+                    {{answer.timeStamp}}
+                </td>
+
+    </tr>
+
+
+    </tbody>
+
+    </table>
+
+    <br>
+    <h3>All Answers for: <small>{{questionDetails}} </small> </h3>
+
+
+    <table class='table table-bordered'>
+
+        <thead>
+            <th>Answer Number</th>
+            <th>Answer Details</th>
+            <th>Action</th>
+
+        </thead>
+        <tbody ng-repeat="answer in answers" ng-if="answer.questionNumber == questionNumber">
+
+            <tr>
+                <td>
+                    <input type='text' value="{{answer.answerNumber}}" disabled>
+                </td>
+                <td>
+                    <input type='text' ng-model="answer.answerDetails">
+                </td>
+
+                <td>
+
+
+                    <button class='btn btn-default' ng-click='updateQuestion(question)'>
+                        Update <span class='glyphicon glyphicon-ok'></span></button>
     <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
         Delete <span class='glyphicon glyphicon-ok'></span></button>
 
@@ -705,6 +686,60 @@
 
 
     </tbody>
+
+    </table>
+
+
+
+
+    </span>
+
+
+
+
+
+    <br>
+
+
+    <h3>All Questions:  </h3>
+
+    <table class='table table-bordered'>
+
+        <thead>
+            <th>Question Number</th>
+            <th>Question Details</th>
+            <th>Action</th>
+
+        </thead>
+        <tbody ng-repeat="question in questions">
+
+            <tr>
+                <td>
+                    <input type='text' value="{{question.questionNumber}}" disabled>
+                </td>
+                <td>
+                    <input type='text' ng-model="question.questionDetails">
+                </td>
+
+                <td>
+                    <button class='btn btn-default' ng-click='chooseQuestion(question)'>
+                        Choose <span class='glyphicon glyphicon-ok'></span></button>
+
+                    <button class='btn btn-default' ng-click='updateQuestion(question)'>
+                        Update <span class='glyphicon glyphicon-ok'></span></button>
+                    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
+                        Delete <span class='glyphicon glyphicon-ok'></span></button>
+
+
+
+                </td>
+
+
+
+            </tr>
+
+
+        </tbody>
 
     </table>
 
@@ -737,23 +772,18 @@
     </div>
 
 
-                        
-      <br>
+
+    <br>
 
 
     <h3>Create New Answer: </h3>
 
     <div>
 
-         <label>Question Number</label>
+        <label>Question Number</label>
         <input type='text' id='questionNumber' ng-model='questionNumber'>
         <br>
-        
-        <label>Answer Description</label>
-        <input type='text' id='answerDescrption' ng-model='answerDescription'>
-        <br>
-        
-        
+
         <label>Answer Number</label>
         <input type='text' id='answerNumber' ng-model='answerNumber'>
         <br>
@@ -771,25 +801,28 @@
             Save <span class='glyphicon glyphicon-ok'></span></button>
 
     </div>
-                   
-                        
-                        
-                        
-                        
 
 
-    </div> <!--end col-md-row12 1 -->
 
 
-    </div>   <!--row 1 -->
-   
 
 
-    </div>   <!--end Jumbotron 1 -->
-   
+
+    </div>
+    <!--end col-md-row12 1 -->
 
 
-   
+    </div>
+    <!--row 1 -->
+
+
+
+    </div>
+    <!--end Jumbotron 1 -->
+
+
+
+
 
     </span>
 
@@ -808,7 +841,7 @@
 
 
                         <form ng-submit="addMessage()">
-                            <label>Teacher Message</label>
+                            <h3>Teacher Message</h3>
                             <input type="text" ng-model="message">
                             <input type="submit" value="Add Message" class='btn btn-default'>
                         </form>
@@ -834,21 +867,12 @@
     <!--end show span-->
 
 
-
-             </span>       <!--end show option when userType is Teacher -->
-
-
-
-
-
+    </span>
+    <!--end show option when userType is Teacher -->
 
 
     </div>
     <!--end studentCtrl -->
-
-
-
-
 
     </div>
     <!--end container-->
