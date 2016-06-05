@@ -5,7 +5,7 @@ var app = angular.module('myApp', ["firebase"]);
     CONTROLLER FOR APP
   ******************************************************* */
 
-app.controller('studentCtrl', ["$scope", "chatMessages", function ($scope, chatMessages) {
+app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chatMessages) {
     
     
     /*******************************************************  
@@ -192,12 +192,17 @@ app.controller('studentCtrl', ["$scope", "chatMessages", function ($scope, chatM
 
     // Assign back end to myStudentData var on the Scope
 
-    $scope.myStudentData = new Firebase('https://glaring-heat-6775.firebaseio.com/Students');   
+    
+    
+    $scope.myStudentData = new Firebase('https://glaring-heat-6775.firebaseio.com/Students');  
+        
+           
     
     $scope.studentId = null;
     $scope.studentName = null;
     $scope.studentEmail = null;
     $scope.students = {};
+      
 
     // Persist student on click to Firebase
     $scope.saveStudent = function () {
@@ -274,8 +279,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages", function ($scope, chatM
     });
     
     
-    
-    
+  
     
     /*******************************************************  
     TEACHERS METHODS
@@ -416,7 +420,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages", function ($scope, chatM
         console.log('question.questionNumber  ');
         console.log(questionNumber);
 
-        // Remove student by the key at https://glaring-heat-6775.firebaseio.com/Students/studentId
+        // Remove question by the key at https://glaring-heat-6775.firebaseio.com/Students/studentId
         $scope.myQuestionData.child(questionNumber).set(null);
         $scope.questionNumber = null;
         $scope.questionDetails = null;
