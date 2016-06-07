@@ -37,7 +37,8 @@
 
             <span ng-show="IsMainPanelVisible"> 
             
-            
+        
+                
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
 
                 <div class="btn-group" role="group">
@@ -57,15 +58,19 @@
                 <span class='glyphicon glyphicon-user'> </span>
             </button>
 
-
-
         </div>
 
     </div>
 
-    <!--<img src="http://www.gotthetahealing.com/attachments/Image/website/top_teacher_assistant_hat-p148601626706409662qz14_400.jpg" alt="Teacher Assistant" style="width:400px;height:400px;" style="float:center">-->
+    <div class="jumbotron">
 
+        <div align="center">
 
+            <img src="http://rlv.zcache.com/worlds_most_awesome_teachers_assistant_tile-rf0fe7910dd96467589fac23aedb84d66_agtk1_8byvr_324.jpg">
+
+        </div>
+
+    </div>
 
 
     </span>
@@ -206,11 +211,21 @@
 
 
     <span ng-show="userTypeStudent">  
+        
+     <span ng-show="!IsStudentMenuVisible">    
             
-            
-            
+    <div class="jumbotron">
 
-            <span ng-show="IsStudentMenuVisible">     <!--Show only when Select Student button is clicked-->
+    <div align="center">
+
+        <img src="http://rlv.zcache.com/worlds_most_awesome_teachers_assistant_tile-rf0fe7910dd96467589fac23aedb84d66_agtk1_8byvr_324.jpg">
+
+        </div>
+
+    </div>
+    </span>
+
+    <span ng-show="IsStudentMenuVisible">     <!--Show only when Select Student button is clicked-->
 
             <div class="jumbotron">
 
@@ -440,8 +455,25 @@
     <span ng-show="userTypeTeacher">     <!--Show only when Select Teacher button is clicked-->
 
         
-        
-          <span ng-show="IsTeacherMenuVisible">     <!--Show only when Select Teacher button is clicked-->
+            <span ng-show="!IsTeacherMenuVisible">    
+            
+    <div class="jumbotron">
+
+    <div align="center">
+
+        <img src="http://rlv.zcache.com/worlds_most_awesome_teachers_assistant_tile-rf0fe7910dd96467589fac23aedb84d66_agtk1_8byvr_324.jpg">
+
+        </div>
+
+    </div>
+    </span>
+
+
+
+
+
+
+    <span ng-show="IsTeacherMenuVisible">     <!--Show only when Select Teacher button is clicked-->
         
             <div class="jumbotron">
 
@@ -471,23 +503,24 @@
                     <tr>
                         
                          <td>
-                            <input type='text' value="{{teacher.teacherId}}" disabled>
-                        </td>
-                        <td>
-                            <input type='text' value="{{teacher.teacherName}}" >
-                        </td>
-                        <td>
-                            <input type='text' ng-model="teacher.teacherEmail">
-                        </td>
-
-                        <td>
-                            <button class='btn btn-default' ng-click='chooseTeacher(teacher)'>
+                             <button class='btn btn-default' ng-click='chooseTeacher(teacher)'>
                                 Choose <span class='glyphicon glyphicon-ok'></span></button>
+    <input type='text' value="{{teacher.teacherId}}" disabled>
+    </td>
+    <td>
+        <input type='text' value="{{teacher.teacherName}}">
+    </td>
+    <td>
+        <input type='text' ng-model="teacher.teacherEmail">
+    </td>
 
-    <button class='btn btn-default' ng-click='updateTeacher(teacher)'>
-        Update <span class='glyphicon glyphicon-ok'></span></button>
-    <button class='btn btn-default' ng-click='deleteTeacher(teacher.teacherName)'>
-        Delete <span class='glyphicon glyphicon-ok'></span></button>
+    <td>
+
+
+        <button class='btn btn-default' ng-click='updateTeacher(teacher)'>
+            Update <span class='glyphicon glyphicon-ok'></span></button>
+        <button class='btn btn-default' ng-click='deleteTeacher(teacher.teacherName)'>
+            Delete <span class='glyphicon glyphicon-ok'></span></button>
 
 
 
@@ -662,7 +695,7 @@
 
             <tr>
                 <td>
-                    <input type='text' value="{{answer.answerNumber}}" disabled>
+                    value="{{answer.answerNumber}}
                 </td>
                 <td>
                     <input type='text' ng-model="answer.answerDetails">
@@ -715,15 +748,16 @@
 
             <tr>
                 <td>
-                    <input type='text' value="{{question.questionNumber}}" disabled>
+                    <button class='btn btn-default' ng-click='chooseQuestion(question)'>
+                        Choose <span class='glyphicon glyphicon-ok'></span></button>
+
+                    {{question.questionNumber}}
                 </td>
                 <td>
                     <input type='text' ng-model="question.questionDetails">
                 </td>
 
                 <td>
-                    <button class='btn btn-default' ng-click='chooseQuestion(question)'>
-                        Choose <span class='glyphicon glyphicon-ok'></span></button>
 
                     <button class='btn btn-default' ng-click='updateQuestion(question)'>
                         Update <span class='glyphicon glyphicon-ok'></span></button>
@@ -870,9 +904,9 @@
     </span>
     <!--end show option when userType is Teacher -->
 
-
     </div>
     <!--end studentCtrl -->
+
 
     </div>
     <!--end container-->

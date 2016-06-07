@@ -569,20 +569,20 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
         $scope.choosenAnswer.studentName = $scope.studentName;
         $scope.choosenAnswer.timeStamp = new Date().toString();
         
-        
-       /* var answersObject = $scope.choosenQuestion.studentsAnswers;
-          
-        var choosenAnswer = $scope.choosenAnswer;
-             
-        answersObject.choosenAnswer;*/
-        
         console.log('This is answersObject: ');
         console.log($scope.choosenAnswer);
         
          
         $scope.myStudentAnswerData.push($scope.choosenAnswer);
         
-           
+          
+        $scope.questionNumber = null;
+        $scope.questionDetails = null;
+        $scope.answerNumber = null;
+        $scope.answerDetails = null;
+        
+        
+        
     };
     
     
