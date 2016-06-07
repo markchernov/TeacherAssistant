@@ -212,8 +212,10 @@
 
     <span ng-show="userTypeStudent">  
         
-     <span ng-show="!IsStudentMenuVisible">    
-            
+  <!--    <span ng-show='"!IsStudentMenuVisible" && !IsStudentQuestionsMenuVisible && !IsStudentMessagesMenuVisible'>     -->
+         
+    <span ng-show="showPic">
+                   
     <div class="jumbotron">
 
     <div align="center">
@@ -455,7 +457,7 @@
     <span ng-show="userTypeTeacher">     <!--Show only when Select Teacher button is clicked-->
 
         
-            <span ng-show="!IsTeacherMenuVisible">    
+            <span ng-show="showPic">    
             
     <div class="jumbotron">
 
@@ -495,17 +497,23 @@
                     <th>Teacher Id</th>
                     <th>Teacher Name</th>
                     <th>Email</th>
-                    <th>Action</th>
-
+            
                 </thead>
                 <tbody ng-repeat="teacher in teachers">
 
                     <tr>
                         
                          <td>
+                             
+                              {{teacher.teacherId}}
                              <button class='btn btn-default' ng-click='chooseTeacher(teacher)'>
                                 Choose <span class='glyphicon glyphicon-ok'></span></button>
-    <input type='text' value="{{teacher.teacherId}}" disabled>
+                             <button class='btn btn-default' ng-click='updateTeacher(teacher)'>
+            Update <span class='glyphicon glyphicon-ok'></span></button>
+        <button class='btn btn-default' ng-click='deleteTeacher(teacher.teacherName)'>
+            Delete <span class='glyphicon glyphicon-ok'></span></button>
+                             
+                           
     </td>
     <td>
         <input type='text' value="{{teacher.teacherName}}">
@@ -513,19 +521,6 @@
     <td>
         <input type='text' ng-model="teacher.teacherEmail">
     </td>
-
-    <td>
-
-
-        <button class='btn btn-default' ng-click='updateTeacher(teacher)'>
-            Update <span class='glyphicon glyphicon-ok'></span></button>
-        <button class='btn btn-default' ng-click='deleteTeacher(teacher.teacherName)'>
-            Delete <span class='glyphicon glyphicon-ok'></span></button>
-
-
-
-    </td>
-
 
 
     </tr>
@@ -688,7 +683,7 @@
         <thead>
             <th>Answer Number</th>
             <th>Answer Details</th>
-            <th>Action</th>
+            
 
         </thead>
         <tbody ng-repeat="answer in answers" ng-if="answer.questionNumber == questionNumber">
@@ -696,23 +691,14 @@
             <tr>
                 <td>
                     value="{{answer.answerNumber}}
+                     <button class='btn btn-default' ng-click='updateQuestion(question)'>
+                        Update <span class='glyphicon glyphicon-ok'></span></button>
+    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
+        Delete <span class='glyphicon glyphicon-ok'></span></button>
                 </td>
                 <td>
                     <input type='text' ng-model="answer.answerDetails">
                 </td>
-
-                <td>
-
-
-                    <button class='btn btn-default' ng-click='updateQuestion(question)'>
-                        Update <span class='glyphicon glyphicon-ok'></span></button>
-    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
-        Delete <span class='glyphicon glyphicon-ok'></span></button>
-
-
-
-    </td>
-
 
 
     </tr>
@@ -722,13 +708,7 @@
 
     </table>
 
-
-
-
     </span>
-
-
-
 
 
     <br>
@@ -741,34 +721,25 @@
         <thead>
             <th>Question Number</th>
             <th>Question Details</th>
-            <th>Action</th>
-
+       
         </thead>
         <tbody ng-repeat="question in questions">
 
             <tr>
                 <td>
+                    {{question.questionNumber}}
                     <button class='btn btn-default' ng-click='chooseQuestion(question)'>
                         Choose <span class='glyphicon glyphicon-ok'></span></button>
-
-                    {{question.questionNumber}}
-                </td>
-                <td>
-                    <input type='text' ng-model="question.questionDetails">
-                </td>
-
-                <td>
-
                     <button class='btn btn-default' ng-click='updateQuestion(question)'>
                         Update <span class='glyphicon glyphicon-ok'></span></button>
                     <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
                         Delete <span class='glyphicon glyphicon-ok'></span></button>
 
-
-
+                    
                 </td>
-
-
+                <td>
+                    <input type='text' ng-model="question.questionDetails">
+                </td>
 
             </tr>
 

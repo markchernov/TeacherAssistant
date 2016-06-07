@@ -16,6 +16,8 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     
    /* MAIN Panel*/
     
+    
+    
     $scope.IsMainPanelVisible = true;
     
     $scope.IsStudentsPanelVisible = false;
@@ -50,17 +52,21 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     /* STUDENT OR TEACHER Panel*/
     
     
-    
+    $scope.showPic = true;
     
     $scope.IsStudentMenuVisible = false;
     // Function to show or hide div
     $scope.ShowHideStudents = function () {
                 //If DIV is visible it will be hidden and vice versa.
-                $scope.IsStudentMenuVisible = $scope.IsStudentsMenuVisible ? false : true;
+                //$scope.IsStudentMenuVisible = $scope.IsStudentsMenuVisible ? false : true;
+        
+                $scope.IsStudentMenuVisible = true;
         
                 $scope.IsStudentQuestionsMenuVisible = false;
         
                 $scope.IsStudentMessagesMenuVisible = false;
+        
+                $scope.showPic = false;
         
             };
     
@@ -69,32 +75,32 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     // Function to show or hide div
     $scope.ShowHideTeachers = function () {
                 //If DIV is visible it will be hidden and vice versa.
-                $scope.IsTeacherMenuVisible = $scope.IsTeachersMenuVisible ? false : true;
+                //$scope.IsTeacherMenuVisible = $scope.IsTeachersMenuVisible ? false : true;
+        
+                $scope.IsTeacherMenuVisible = true;
         
                 $scope.IsTeacherQuestionsMenuVisible = false;
         
                 $scope.IsTeacherMessagesMenuVisible = false;
         
+                $scope.showPic = false;
+        
             };
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     $scope.IsStudentQuestionsMenuVisible = false;
     // Function to show or hide div
     $scope.ShowHideStudentQuestions = function () {
                 //If DIV is visible it will be hidden and vice versa.
-                $scope.IsStudentQuestionsMenuVisible = $scope.IsQuestionsMenuVisible ? false : true;
+                //$scope.IsStudentQuestionsMenuVisible = $scope.IsQuestionsMenuVisible ? false : true;
         
+                $scope.IsStudentQuestionsMenuVisible = true;
+                
                 $scope.IsStudentMenuVisible = false;
         
                 $scope.IsStudentMessagesMenuVisible =  false;
+        
+                $scope.showPic = false;
         
             };
     
@@ -104,11 +110,15 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     // Function to show or hide div
     $scope.ShowHideTeacherQuestions = function () {
                 //If DIV is visible it will be hidden and vice versa.
-                $scope.IsTeacherQuestionsMenuVisible = $scope.IsQuestionsMenuVisible ? false : true;
+                //$scope.IsTeacherQuestionsMenuVisible = $scope.IsQuestionsMenuVisible ? false : true;
+        
+                $scope.IsTeacherQuestionsMenuVisible = true;
         
                 $scope.IsTeacherMenuVisible = false;
         
                 $scope.IsTeacherMessagesMenuVisible =  false;
+        
+                $scope.showPic = false;
         
             };
       
@@ -116,11 +126,15 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     // Function to show or hide div
     $scope.ShowHideStudentMessages = function () {
                 //If DIV is visible it will be hidden and vice versa.
-                $scope.IsStudentMessagesMenuVisible = $scope.IsMessagesMenuVisible ? false : true;
+                //$scope.IsStudentMessagesMenuVisible = $scope.IsMessagesMenuVisible ? false : true;
+        
+                $scope.IsStudentMessagesMenuVisible = true;
         
                 $scope.IsStudentMenuVisible =  false;
         
                 $scope.IsStudentQuestionsMenuVisible = false;
+        
+                $scope.showPic = false;
         
             };
     
@@ -131,23 +145,20 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     // Function to show or hide div
     $scope.ShowHideTeacherMessages = function () {
                 //If DIV is visible it will be hidden and vice versa.
-                $scope.IsTeacherMessagesMenuVisible = $scope.IsMessagesMenuVisible ? false : true;
+                //$scope.IsTeacherMessagesMenuVisible = $scope.IsMessagesMenuVisible ? false : true;
+        
+                $scope.IsTeacherMessagesMenuVisible = true;
         
                 $scope.IsTeacherMenuVisible =  false;
         
                 $scope.IsTeacherQuestionsMenuVisible = false;
         
+                $scope.showPic = false;
+        
             };
     
     
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     
   
