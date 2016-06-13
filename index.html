@@ -23,7 +23,7 @@
         <div ng-controller='studentCtrl'>
 
             <div class="page-header">
-                <h1>Teacher Assistant <small>ISTM6215 Project <strong> H</strong>uman  <strong>C</strong>omputer Interaction</small>  
+                <h1><span class='glyphicon glyphicon-education'></span> Teacher Assistant <small>ISTM6215 <strong> H</strong>uman  <strong>C</strong>omputer Interaction</small>  
                 <span ng-show="studentName">     Welcome,   {{studentName}}</span>  <span ng-show="teacherName">     Welcome,   {{teacherName}}</span></h1>
             </div>
 
@@ -177,7 +177,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" ng-disabled='teacherName == null ' class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="LogOut()">
-            <h4><small>4</small></h4><span class='glyphicon glyphicon-off'></span>Log Out 
+            <h4><small>4</small></h4><span class='glyphicon glyphicon-off'></span> Log Out 
         </button>
 
 
@@ -236,7 +236,9 @@
 
         <br>
 
-   
+       <div class="panel panel-default">
+                           
+
             <table class='table table-bordered'>
 
                 <thead>
@@ -249,7 +251,7 @@
                     <tr>
                         
                          <td>
-                             <button class='btn btn-default' ng-click='chooseStudent(student)'>
+                             <button class='btn btn-default btn-lg'  ng-click='chooseStudent(student)'>
                            <span class='glyphicon glyphicon-ok-sign'></span>  {{student.studentId}} </button>
    
     </td>
@@ -267,7 +269,9 @@
 
     </table>
 
-
+                        </div>
+           
+           
     <br>
 
 
@@ -301,11 +305,12 @@
                     <div class="col-md-12">
 
 
-                        <h3>Selected Question: <small>{{questionDetails}} </small> </h3>
+                    
 
-
-        
-    <br>
+        <div class="panel panel-default">
+  
+              <div class="panel-heading"><h3> Selected Question: <small>{{questionDetails}} </small></h3></div>
+   
 
     
         <table class='table table-bordered'>
@@ -319,7 +324,7 @@
 
                 <tr>
                     <td>
-                        <button class='btn btn-default' ng-click='chooseQuestion(question)'>
+                        <button class='btn btn-default btn-lg' ng-click='chooseQuestion(question)'>
                          <span class='glyphicon glyphicon-ok-sign'></span>  {{question.questionNumber}}</button>
 
     </td>
@@ -334,20 +339,22 @@
     </tbody>
 
     </table>
+    </div>
 
 
+   <div class="panel panel-default">
+  
+       <div class="panel-heading"><h3>Selected Answer: <small>{{answerDetails}} </small> 
 
-    <br>
 
-
-    <h3>Selected Answer: <small>{{answerDetails}} </small> 
+    
                             
-                            <span ng-show="answerDetails"> <button class='btn btn-default' ng-click='saveChoosenAnswer(choosenAnswer)'> 
-                            <span class='glyphicon glyphicon-floppy-saved'></span> {{answerNumber}} </button>  </span> 
+                            <span ng-show="answerDetails"> <button class='btn btn-default btn-lg' ng-click='saveChoosenAnswer(choosenAnswer)'> 
+                            <span class='glyphicon glyphicon-floppy-saved'></span> {{answerNumber}} </button>  </span> </h3>
                             
-                        </h3>
-
-    <br>
+                      
+      </div>
+    
     <table class='table table-bordered'>
 
         <thead>
@@ -359,7 +366,7 @@
 
             <tr>
                 <td>
-                    <button class='btn btn-default' ng-click='chooseAnswer(answer)'>
+                    <button class='btn btn-default btn-lg' ng-click='chooseAnswer(answer)'>
                        <span class='glyphicon glyphicon-ok-sign'></span>  {{answer.answerNumber}} </button>
                    
                 </td>
@@ -374,10 +381,7 @@
 
     </table>
 
-
-
-
-    <br>
+                        </div>
 
 
 
@@ -397,7 +401,7 @@
 
 
 
-    <br>
+    
 
 
     <span ng-show="IsStudentMessagesMenuVisible">     <!--Show only when Messages button is clicked-->
@@ -409,16 +413,26 @@
                 <div class="col-md-12">
 
 
-                        <form ng-submit="addMessage()">
+                     <!--   <form ng-submit="addMessage()">
                             <h3>Student Message</h3>
                             <input type="text" ng-model="message">
-                           <input type="submit" value="Add Message" class='btn btn-default'>
-                        </form>
+                           <input type="submit" value="Add Message" class='btn btn-default btn-lg'>
+                        </form>-->
 
+                    <form ng-submit="addMessage()">  
+                    <div class="input-group input-group-lg">
+                      
+                    <span class="input-group-btn" id="sizing-addon1">
+                    <button class='btn btn-default btn-lrg ' ng-click='chooseAnswer(answer)'> <span class='glyphicon glyphicon-envelope'> </span> </button>
+                    </span>  <input type="text" class="form-control" placeholder="Type your message here" aria-describedby="sizing-addon1" ng-model="message">
+     
+                    </div>
+                    </form>  
+                    
+                    <br>
 
-
-                        <ul class="chatbox">
-                            <li ng-repeat="message in messages"><strong>{{ message.from }} </strong>: {{ message.content }} - {{ message.timestamp }}
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="message in messages"> <strong>{{ message.from }} : </strong> {{ message.content }} <span class="badge"> {{ message.timestamp }} </span>
                             </li>
                         </ul>
 
@@ -482,9 +496,10 @@
 
           
 
-        <br>
+       <div class="panel panel-default">
+  
+            
 
-        <div>
             <table class='table table-bordered'>
 
                 <thead>
@@ -500,12 +515,12 @@
                          <td>
                              
                               
-                             <button class='btn btn-default' ng-click='chooseTeacher(teacher)'>
+                             <button class='btn btn-default btn-lg' ng-click='chooseTeacher(teacher)'>
                              <span class='glyphicon glyphicon-ok-sign'></span> {{teacher.teacherId}} </button>
-                             <button class='btn btn-default' ng-click='updateTeacher(teacher)'>
+                             <button class='btn btn-default btn-lg' ng-click='updateTeacher(teacher)'>
              <span class='glyphicon glyphicon-floppy-disk'></span></button>
                              
-        <button class='btn btn-default' ng-click='deleteTeacher(teacher.teacherName)'>
+        <button class='btn btn-default btn-lg' ng-click='deleteTeacher(teacher.teacherName)'>
         <span class='glyphicon glyphicon-floppy-remove'></span></button>
                              
                            
@@ -528,72 +543,61 @@
     </table>
 
 
-    <br>
-
-
-    <h3>Create New Teacher: </h3>
-
-    <div>
-
-        <label>Teacher Id</label>
-        <input type='text' id='teacherName' ng-model='teacherId'>
-        <br>
-
-        <label>Teacher Name</label>
-        <input type='text' id='teacherName' ng-model='teacherName'>
-        <br>
-
-        <label>Teacher Email</label>
-        <input type='text' id='teacherEmail' ng-model='teacherEmail'>
-        <br>
-
-
     </div>
+    
+            
 
-    <div>
+<form class="navbar-form navbar-left" role="search">
+      <h3>Create New Teacher: </h3>       
 
-        <button class='btn btn-default' ng-click='saveTeacher()'>
+    <div class="form-group">
+               
+
+        <label> Id</label>
+        <input type='text' id='teacherName' ng-model='teacherId' class="form-control">
+        
+
+        <label> Name</label>
+        <input type='text' id='teacherName' ng-model='teacherName' class="form-control">
+       
+
+        <label> Email</label>
+        <input type='text' id='teacherEmail' ng-model='teacherEmail' class="form-control">
+       
+
+        <button class='btn btn-default btn-lg' ng-click='saveTeacher()'>
         <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
+  </form>
+    
 
-    <br>
-
-
+<form class="navbar-form navbar-left" role="search">
     <h3>Create New Student: </h3>
 
-    <div>
+    <div class="form-group">
 
-        <label>Student Id</label>
-        <input type='text' id='studentName' ng-model='studentId'>
-        <br>
+        <label> Id</label>
+        <input type='text' id='studentName' ng-model='studentId' class="form-control">
+       
 
-        <label>Student Name</label>
-        <input type='text' id='studentName' ng-model='studentName'>
-        <br>
+        <label> Name</label>
+        <input type='text' id='studentName' ng-model='studentName' class="form-control">
+        
 
-        <label>Student Email</label>
-        <input type='text' id='studentEmail' ng-model='studentEmail'>
-        <br>
+        <label> Email</label>
+        <input type='text' id='studentEmail' ng-model='studentEmail' class="form-control">
+        
 
-
-    </div>
-
-    <div>
-
-        <button class='btn btn-default' ng-click='saveStudent()'>
+        <button class='btn btn-default btn-lg' ng-click='saveStudent()'>
         <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
-
-
-
-
-    </div>
-
-
+</form>
+            
+            
     </div>
     <!--end col-md-row12 1 -->
 
@@ -622,24 +626,28 @@
 
                     <div class="col-md-12">
 
-
-                        <h3>Selected Question: {{questionNumber}} <small> {{questionDetails}} </small> 
-                        
-                        <span ng-show="questionDetails"> <button class='btn btn-default' ng-click='displayAnswers(questionNumber)'>
+                    <div class="panel panel-default">
+  
+                             <div class="panel-heading"><h3>Selected Question: {{questionNumber}} <small> {{questionDetails}} </small>    
+                     
+  
+                        <span ng-show="questionDetails"> <button class='btn btn-default btn-lg' ng-click='displayAnswers(questionNumber)'>
                             Statistics <span class='glyphicon glyphicon-blackboard'></span></button>
     </span>
 
-
+      
     </h3>
-
-    <br>
+     </div>                            
+     </div>
+    
 
 
     <span ng-show="questionNumber">                   
                         
-                        
-     <h3>Student Answers for:  <small> {{questionNumber}} </small> </h3>
-
+        <div class="panel panel-default">
+  
+            <div class="panel-heading"> <h3>Student Answers for:  <small> {{questionNumber}} </small> </h3> </div>
+ 
 
     <table class='table table-bordered'>
 
@@ -671,8 +679,15 @@
 
     </table>
 
-    <br>
-    <h3>All Answers for: <small>{{questionDetails}} </small> </h3>
+    </div>
+            
+            
+       <div class="panel panel-default">
+  
+           <div class="panel-heading"> <h3>All Answers for: <small>{{questionDetails}} </small> </h3>   </div>
+            
+            
+   
 
 
     <table class='table table-bordered'>
@@ -688,30 +703,36 @@
             <tr>
                 <td>
                    {{answer.answerNumber}}
-                     <button class='btn btn-default' ng-click='updateQuestion(question)'>
+                     <button class='btn btn-default btn-lg' ng-click='updateQuestion(question)'>
                      <span class='glyphicon glyphicon-floppy-disk'></span></button>
-    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
+    <button class='btn btn-default btn-lg' ng-click='deleteQuestion(question.questionNumber)'>
                 <span class='glyphicon glyphicon-floppy-remove'></span></button>
                 </td>
                 <td>
-                    <input type='text' ng-model="answer.answerDetails">
+                    <input type='text' ng-model="answer.answerDetails" class="form-control">
                 </td>
-
-
     </tr>
 
 
     </tbody>
 
     </table>
+                                 
+     </div>
+            
+    
+   </span>
 
-    </span>
 
-
-    <br>
-
-
-    <h3>All Questions:  </h3>
+                        
+                        
+     <div class="panel panel-default">
+  
+           <div class="panel-heading"> <h3>All Questions:  </h3> </div>                   
+                        
+                        
+                        
+    
 
     <table class='table table-bordered'>
 
@@ -725,17 +746,17 @@
             <tr>
                 <td>
                     
-                    <button class='btn btn-default' ng-click='chooseQuestion(question)'>
+                    <button class='btn btn-default btn-lg' ng-click='chooseQuestion(question)'>
                     <span class='glyphicon glyphicon-ok-sign'></span> {{question.questionNumber}} </button>
-                    <button class='btn btn-default' ng-click='updateQuestion(question)'>
+                    <button class='btn btn-default btn-lg' ng-click='updateQuestion(question)'>
                        <span class='glyphicon glyphicon-floppy-disk'></span></button>
-                    <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
+                    <button class='btn btn-default btn-lg' ng-click='deleteQuestion(question.questionNumber)'>
                          <span class='glyphicon glyphicon-floppy-remove'></span></button>
 
                     
                 </td>
                 <td>
-                    <input type='text' ng-model="question.questionDetails">
+                    <input type='text' ng-model="question.questionDetails" class="form-control">
                 </td>
 
             </tr>
@@ -746,93 +767,97 @@
     </table>
 
 
+   </div>
 
+    
+<form class="navbar-form navbar-left" role="search">
+      <h3>Create New Question: </h3>       
 
-    <br>
-
-
-    <h3>Create New Question: </h3>
-
-    <div>
-
-        <label>Question Number</label>
-        <input type='text' id='questionNumber' ng-model='questionNumber'>
-        <br>
-
-        <label>Question Details</label>
-        <input type='text' id='questionDetails' ng-model='questionDetails'>
-        <br>
-
-
-    </div>
+ 
 
     <div>
 
-        <button class='btn btn-default' ng-click='saveQuestion()'>
+        <label> Number</label>
+        <input type='text' id='questionNumber' ng-model='questionNumber' class="form-control">
+        
+
+        <label> Details</label>
+        <input type='text' id='questionDetails' ng-model='questionDetails' class="form-control">
+       
+
+        <button class='btn btn-default btn-lg' ng-click='saveQuestion()'>
         <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
 
 
-    <br>
+    </form>
 
 
+                        
+   <form class="navbar-form navbar-left" role="search">                     
     <h3>Create New Answer: </h3>
 
     <div>
 
-        <label>Question Number</label>
-        <input type='text' id='questionNumber' ng-model='questionNumber'>
-        <br>
+        <label> Number</label>
+        <input type='text' id='questionNumber' ng-model='questionNumber' class="form-control">
+        
 
-        <label>Answer Number</label>
-        <input type='text' id='answerNumber' ng-model='answerNumber'>
-        <br>
+        <label> Number</label>
+        <input type='text' id='answerNumber' ng-model='answerNumber' class="form-control">
+        
 
-        <label>Answer Details</label>
-        <input type='text' id='answerDetails' ng-model='answerDetails'>
-        <br>
+        <label> Details</label>
+        <input type='text' id='answerDetails' ng-model='answerDetails' class="form-control">
 
 
-    </div>
-
-    <div>
-
-        <button class='btn btn-default' ng-click='saveAnswer()'>
+        <button class='btn btn-default btn-lg' ng-click='saveAnswer()'>
             <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
 
-
-
+ </form>
 
 
 
     </div>
-    <!--end col-md-row12 1 -->
+     <!--end col-md-row12 1 -->
 
-
-    </div>
-    <!--row 1 -->
-
-
+      </div><!--row 1 -->
 
     </div>
     <!--end Jumbotron 1 -->
 
-
-
-
-
+    
     </span>
 
 
-
-    <br>
-
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     <span ng-show="IsTeacherMessagesMenuVisible">     <!--Show only when Messages button is clicked-->
 
         <div class="jumbotron">
@@ -842,16 +867,29 @@
                 <div class="col-md-12">
 
 
-                        <form ng-submit="addMessage()">
+                      <!--  <form ng-submit="addMessage()">
                             <h3>Teacher Message</h3>
                             <input type="text" ng-model="message">
                             <input type="submit" value="Add Message" class='btn btn-default'>
-                        </form>
+                        </form>-->
 
 
+                    <form ng-submit="addMessage()">  
+                    <div class="input-group input-group-lg">
+                      
+                    <span class="input-group-btn" id="sizing-addon1">
+                    <button class='btn btn-default btn-lrg ' ng-click='chooseAnswer(answer)'> <span class='glyphicon glyphicon-envelope'> </span> </button>
+                    </span>  <input type="text" class="form-control" placeholder="Type your message here" aria-describedby="sizing-addon1" ng-model="message">
+     
+                    </div>
+                    </form>  
+                    
+                    <br>
+                    
+                    
 
-                        <ul class="chatbox">
-                            <li ng-repeat="message in messages"><strong>{{ message.from }} </strong>: {{ message.content }} - {{ message.timestamp }}
+                          <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="message in messages"> <strong>{{ message.from }} : </strong> {{ message.content }} <span class="badge"> {{ message.timestamp }} </span>
                             </li>
                         </ul>
 
@@ -865,6 +903,7 @@
 
         </div>
         <!--end jumbotron 2-->
+        
         </span>
     <!--end show span-->
 
