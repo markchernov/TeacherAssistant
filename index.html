@@ -44,7 +44,7 @@
                 <div class="btn-group" role="group">
 
                     <button type="button" class="btn btn-default " ng-click="ShowStudentsPanel()" class='glyphicon glyphicon-user'>
-                       <h4><small>STUDENTS</small></h4>  
+                       <h4><small> STUDENT</small></h4>  
 
                          <span class='glyphicon glyphicon-user'> </span>
 
@@ -54,7 +54,7 @@
 
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-default " ng-click="ShowTeachersPanel()">
-                <h4><small>TEACHERS</small></h4>
+                <h4><small>TEACHER</small></h4>
                 <span class='glyphicon glyphicon-user'> </span>
             </button>
 
@@ -94,11 +94,7 @@
                 <div class="btn-group" role="group">
 
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="ShowHideStudents()">
-                        <h4><small>1</small></h4> Select Student
-
-                        <!-- <span ng-show="IsVisible">
-                           {{studentName}}  </span>-->
-    <span class="caret"></span>
+                        <h4><small>1</small></h4> <span class='glyphicon glyphicon-user'  ></span> Student
 
     </button>
 
@@ -106,7 +102,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="ShowHideStudentQuestions()" ng-disabled='studentName == null'>
-            <h4><small>2</small></h4> Select Question <span class="caret"></span>
+            <h4><small>2</small></h4><span class='glyphicon glyphicon-check' ></span>  Question 
         </button>
 
 
@@ -115,7 +111,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" ng-disabled='studentName == null ' class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="ShowHideStudentMessages()">
-            <h4><small>3</small></h4>Select Message <span class="caret"></span>
+            <h4><small>3</small></h4><span class='glyphicon glyphicon-comment'></span> Message 
         </button>
 
 
@@ -123,7 +119,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" ng-disabled='studentName == null ' class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="LogOut()">
-            <h4><small>4</small></h4>Log Out <span class="caret"></span>
+            <h4><small>4</small></h4><span class='glyphicon glyphicon-off'></span> Log Out 
         </button>
 
 
@@ -154,11 +150,9 @@
                 <div class="btn-group" role="group">
 
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="ShowHideTeachers()">
-                        <h4><small>1</small></h4> Select Teacher
+                        <h4><small>1</small></h4> <span class='glyphicon glyphicon-user'></span> Teacher
 
-                        <!-- <span ng-show="IsVisible">
-                           {{studentName}}  </span>-->
-    <span class="caret"></span>
+    
 
     </button>
 
@@ -166,7 +160,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="ShowHideTeacherQuestions()" ng-disabled='teacherName == null'>
-            <h4><small>2</small></h4> Select Question <span class="caret"></span>
+            <h4><small>2</small></h4> <span class='glyphicon glyphicon-check'></span> Question 
         </button>
 
 
@@ -175,7 +169,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" ng-disabled='teacherName == null ' class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="ShowHideTeacherMessages()">
-            <h4><small>3</small></h4>Select Message <span class="caret"></span>
+            <h4><small>3</small></h4><span class='glyphicon glyphicon-comment'></span> Message 
         </button>
 
 
@@ -183,7 +177,7 @@
 
     <div class="btn-group" role="group">
         <button type="button" ng-disabled='teacherName == null ' class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-click="LogOut()">
-            <h4><small>4</small></h4>Log Out <span class="caret"></span>
+            <h4><small>4</small></h4><span class='glyphicon glyphicon-off'></span>Log Out 
         </button>
 
 
@@ -256,8 +250,8 @@
                         
                          <td>
                              <button class='btn btn-default' ng-click='chooseStudent(student)'>
-                            Select <span class='glyphicon glyphicon-ok'></span></button>
-    {{student.studentId}}
+                           <span class='glyphicon glyphicon-ok-sign'></span>  {{student.studentId}} </button>
+   
     </td>
     <td>
         {{student.studentName}}
@@ -326,8 +320,8 @@
                 <tr>
                     <td>
                         <button class='btn btn-default' ng-click='chooseQuestion(question)'>
-                        Choose <span class='glyphicon glyphicon-ok'></span></button>
-    {{question.questionNumber}}
+                         <span class='glyphicon glyphicon-ok-sign'></span>  {{question.questionNumber}}</button>
+
     </td>
     <td>
         {{question.questionDetails}}
@@ -348,12 +342,12 @@
 
     <h3>Selected Answer: <small>{{answerDetails}} </small> 
                             
-                            <span ng-show="answerDetails"> <button class='btn btn-default' ng-click='saveChoosenAnswer(choosenAnswer)'>
-                            Submit <span class='glyphicon glyphicon-ok'></span></button>  </span> 
+                            <span ng-show="answerDetails"> <button class='btn btn-default' ng-click='saveChoosenAnswer(choosenAnswer)'> 
+                            <span class='glyphicon glyphicon-floppy-saved'></span> {{answerNumber}} </button>  </span> 
                             
                         </h3>
 
-
+    <br>
     <table class='table table-bordered'>
 
         <thead>
@@ -366,8 +360,8 @@
             <tr>
                 <td>
                     <button class='btn btn-default' ng-click='chooseAnswer(answer)'>
-                        Choose <span class='glyphicon glyphicon-ok'></span></button>
-                    {{answer.answerNumber}}
+                       <span class='glyphicon glyphicon-ok-sign'></span>  {{answer.answerNumber}} </button>
+                   
                 </td>
                 <td>
                     {{answer.answerDetails}}
@@ -418,7 +412,7 @@
                         <form ng-submit="addMessage()">
                             <h3>Student Message</h3>
                             <input type="text" ng-model="message">
-                            <input type="submit" value="Add Message" class='btn btn-default'>
+                           <input type="submit" value="Add Message" class='btn btn-default'>
                         </form>
 
 
@@ -505,21 +499,24 @@
                         
                          <td>
                              
-                              {{teacher.teacherId}}
+                              
                              <button class='btn btn-default' ng-click='chooseTeacher(teacher)'>
-                                Choose <span class='glyphicon glyphicon-ok'></span></button>
+                             <span class='glyphicon glyphicon-ok-sign'></span> {{teacher.teacherId}} </button>
                              <button class='btn btn-default' ng-click='updateTeacher(teacher)'>
-            Update <span class='glyphicon glyphicon-ok'></span></button>
+             <span class='glyphicon glyphicon-floppy-disk'></span></button>
+                             
         <button class='btn btn-default' ng-click='deleteTeacher(teacher.teacherName)'>
-            Delete <span class='glyphicon glyphicon-ok'></span></button>
+        <span class='glyphicon glyphicon-floppy-remove'></span></button>
                              
                            
     </td>
     <td>
         <input type='text' value="{{teacher.teacherName}}">
+        
     </td>
     <td>
         <input type='text' ng-model="teacher.teacherEmail">
+    
     </td>
 
 
@@ -556,7 +553,7 @@
     <div>
 
         <button class='btn btn-default' ng-click='saveTeacher()'>
-            Save <span class='glyphicon glyphicon-ok'></span></button>
+        <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
@@ -586,7 +583,7 @@
     <div>
 
         <button class='btn btn-default' ng-click='saveStudent()'>
-            Save <span class='glyphicon glyphicon-ok'></span></button>
+        <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
@@ -626,10 +623,10 @@
                     <div class="col-md-12">
 
 
-                        <h3>Selected Question: <small>{{questionDetails}} </small> 
+                        <h3>Selected Question: {{questionNumber}} <small> {{questionDetails}} </small> 
                         
                         <span ng-show="questionDetails"> <button class='btn btn-default' ng-click='displayAnswers(questionNumber)'>
-                            Statistics <span class='glyphicon glyphicon-ok'></span></button>
+                            Statistics <span class='glyphicon glyphicon-blackboard'></span></button>
     </span>
 
 
@@ -641,7 +638,7 @@
     <span ng-show="questionNumber">                   
                         
                         
-     <h3>Student Answers for: <small>{{questionNumber}} </small> </h3>
+     <h3>Student Answers for:  <small> {{questionNumber}} </small> </h3>
 
 
     <table class='table table-bordered'>
@@ -690,11 +687,11 @@
 
             <tr>
                 <td>
-                    value="{{answer.answerNumber}}
+                   {{answer.answerNumber}}
                      <button class='btn btn-default' ng-click='updateQuestion(question)'>
-                        Update <span class='glyphicon glyphicon-ok'></span></button>
+                     <span class='glyphicon glyphicon-floppy-disk'></span></button>
     <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
-        Delete <span class='glyphicon glyphicon-ok'></span></button>
+                <span class='glyphicon glyphicon-floppy-remove'></span></button>
                 </td>
                 <td>
                     <input type='text' ng-model="answer.answerDetails">
@@ -727,13 +724,13 @@
 
             <tr>
                 <td>
-                    {{question.questionNumber}}
+                    
                     <button class='btn btn-default' ng-click='chooseQuestion(question)'>
-                        Choose <span class='glyphicon glyphicon-ok'></span></button>
+                    <span class='glyphicon glyphicon-ok-sign'></span> {{question.questionNumber}} </button>
                     <button class='btn btn-default' ng-click='updateQuestion(question)'>
-                        Update <span class='glyphicon glyphicon-ok'></span></button>
+                       <span class='glyphicon glyphicon-floppy-disk'></span></button>
                     <button class='btn btn-default' ng-click='deleteQuestion(question.questionNumber)'>
-                        Delete <span class='glyphicon glyphicon-ok'></span></button>
+                         <span class='glyphicon glyphicon-floppy-remove'></span></button>
 
                     
                 </td>
@@ -772,7 +769,7 @@
     <div>
 
         <button class='btn btn-default' ng-click='saveQuestion()'>
-            Save <span class='glyphicon glyphicon-ok'></span></button>
+        <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
@@ -803,7 +800,7 @@
     <div>
 
         <button class='btn btn-default' ng-click='saveAnswer()'>
-            Save <span class='glyphicon glyphicon-ok'></span></button>
+            <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
 
