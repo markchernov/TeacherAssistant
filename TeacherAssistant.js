@@ -666,7 +666,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
       // except that it saves the changes to our database!
         
       var date = new Date();
-      var timestamp = date.toString();
+      var timestamp = date.toDateString() + " " + date.toLocaleTimeString();
         
       console.log('This is $scope.timestamp after new Date(): ');
         console.log($scope.timestamp);  
@@ -687,7 +687,7 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
       if ($scope.messages.length === 0) {
           
         var date = new Date();
-        var timestamp = date.toString();  
+        var timestamp = date.toDateString() + " " + date.toLocaleTimeString();  
           
         $scope.messages.$add({
           from: "Firebase Docs",

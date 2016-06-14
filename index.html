@@ -23,7 +23,7 @@
         <div ng-controller='studentCtrl'>
 
             <div class="page-header">
-                <h1><span class='glyphicon glyphicon-education'></span> Teacher Assistant <small>ISTM6215 <strong> H</strong>uman  <strong>C</strong>omputer Interaction</small>  
+                <h1><span class='glyphicon glyphicon-education'></span> Teacher Assistant <small>ISTM6215 <strong> H</strong>uman  <strong>C</strong>omputer <strong>I</strong>nteraction</small>  
                 <span ng-show="studentName">     Welcome,   {{studentName}}</span>  <span ng-show="teacherName">     Welcome,   {{teacherName}}</span></h1>
             </div>
 
@@ -249,11 +249,10 @@
                 <tbody ng-repeat="student in students">
 
                     <tr>
-                        
                          <td>
-                             <button class='btn btn-default btn-lg'  ng-click='chooseStudent(student)'>
+                         <button class='btn btn-default btn-lrg'  ng-click='chooseStudent(student)'>
                            <span class='glyphicon glyphicon-ok-sign'></span>  {{student.studentId}} </button>
-   
+                                                           
     </td>
     <td>
         {{student.studentName}}
@@ -309,7 +308,7 @@
 
         <div class="panel panel-default">
   
-              <div class="panel-heading"><h3> Selected Question: <small>{{questionDetails}} </small></h3></div>
+              <div class="panel-heading">  <h2>  <span class="label label-default"> " {{questionDetails}} " </span> </h2></div>
    
 
     
@@ -344,16 +343,14 @@
 
    <div class="panel panel-default">
   
-       <div class="panel-heading"><h3>Selected Answer: <small>{{answerDetails}} </small> 
-
-
-    
-                            
-                            <span ng-show="answerDetails"> <button class='btn btn-default btn-lg' ng-click='saveChoosenAnswer(choosenAnswer)'> 
-                            <span class='glyphicon glyphicon-floppy-saved'></span> {{answerNumber}} </button>  </span> </h3>
+       <div class="panel-heading"> <span ng-show="answerDetails">       <button class='btn btn-default btn-lg' ng-click='saveChoosenAnswer(choosenAnswer)'> 
+                            <span class='glyphicon glyphicon-floppy-saved'></span> </button>  </span>  <h2>   <span class="label label-default">
+          " {{answerDetails}} " </span> 
+            
+                             </h2> </div>
                             
                       
-      </div>
+     
     
     <table class='table table-bordered'>
 
@@ -381,7 +378,7 @@
 
     </table>
 
-                        </div>
+      </div>
 
 
 
@@ -412,19 +409,12 @@
 
                 <div class="col-md-12">
 
-
-                     <!--   <form ng-submit="addMessage()">
-                            <h3>Student Message</h3>
-                            <input type="text" ng-model="message">
-                           <input type="submit" value="Add Message" class='btn btn-default btn-lg'>
-                        </form>-->
-
                     <form ng-submit="addMessage()">  
                     <div class="input-group input-group-lg">
                       
                     <span class="input-group-btn" id="sizing-addon1">
                     <button class='btn btn-default btn-lrg ' ng-click='chooseAnswer(answer)'> <span class='glyphicon glyphicon-envelope'> </span> </button>
-                    </span>  <input type="text" class="form-control" placeholder="Type your message here" aria-describedby="sizing-addon1" ng-model="message">
+                    </span>  <input type="text" class="form-control" placeholder="Your message here ..." aria-describedby="sizing-addon1" ng-model="message">
      
                     </div>
                     </form>  
@@ -548,7 +538,7 @@
             
 
 <form class="navbar-form navbar-left" role="search">
-      <h3>Create New Teacher: </h3>       
+      <h3> New Teacher: </h3>       
 
     <div class="form-group">
                
@@ -574,7 +564,7 @@
     
 
 <form class="navbar-form navbar-left" role="search">
-    <h3>Create New Student: </h3>
+    <h3> New Student: </h3>
 
     <div class="form-group">
 
@@ -771,7 +761,7 @@
 
     
 <form class="navbar-form navbar-left" role="search">
-      <h3>Create New Question: </h3>       
+      <h3> New Question: </h3>       
 
  
 
@@ -797,15 +787,15 @@
 
                         
    <form class="navbar-form navbar-left" role="search">                     
-    <h3>Create New Answer: </h3>
+    <h3> New Answer: </h3>
 
     <div>
 
-        <label> Number</label>
+        <label>Question Number</label>
         <input type='text' id='questionNumber' ng-model='questionNumber' class="form-control">
         
 
-        <label> Number</label>
+        <label>Answer Number</label>
         <input type='text' id='answerNumber' ng-model='answerNumber' class="form-control">
         
 
@@ -866,20 +856,12 @@
 
                 <div class="col-md-12">
 
-
-                      <!--  <form ng-submit="addMessage()">
-                            <h3>Teacher Message</h3>
-                            <input type="text" ng-model="message">
-                            <input type="submit" value="Add Message" class='btn btn-default'>
-                        </form>-->
-
-
                     <form ng-submit="addMessage()">  
                     <div class="input-group input-group-lg">
                       
                     <span class="input-group-btn" id="sizing-addon1">
                     <button class='btn btn-default btn-lrg ' ng-click='chooseAnswer(answer)'> <span class='glyphicon glyphicon-envelope'> </span> </button>
-                    </span>  <input type="text" class="form-control" placeholder="Type your message here" aria-describedby="sizing-addon1" ng-model="message">
+                    </span>  <input type="text" class="form-control" placeholder="Your message here ..." aria-describedby="sizing-addon1" ng-model="message">
      
                     </div>
                     </form>  
