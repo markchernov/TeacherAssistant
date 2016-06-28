@@ -535,23 +535,27 @@
 
     </div>
     
-            
+ 
+                        
+ <div class="panel panel-default">                       
 
 <form class="navbar-form navbar-left" role="search">
-      <h3> New Teacher: </h3>       
-
+    
+    
+    
     <div class="form-group">
-               
+            
+        <label> <h3><span class="label label-default">New Teacher:</span></h3></label>
 
-        <label> Id</label>
+        <label>  Id</label>
         <input type='text' id='teacherName' ng-model='teacherId' class="form-control">
         
 
-        <label> Name</label>
+        <label>  Name</label>
         <input type='text' id='teacherName' ng-model='teacherName' class="form-control">
        
 
-        <label> Email</label>
+        <label>  Email</label>
         <input type='text' id='teacherEmail' ng-model='teacherEmail' class="form-control">
        
 
@@ -563,20 +567,29 @@
   </form>
     
 
+                        
+                        
+                       
+                        
+
 <form class="navbar-form navbar-left" role="search">
-    <h3> New Student: </h3>
+    
+  
+    
 
     <div class="form-group">
+        
+        <label> <h3><span class="label label-default">New Student:</span></h3></label>
 
-        <label> Id</label>
+        <label>  Id</label>
         <input type='text' id='studentName' ng-model='studentId' class="form-control">
        
 
-        <label> Name</label>
+        <label>  Name</label>
         <input type='text' id='studentName' ng-model='studentName' class="form-control">
         
 
-        <label> Email</label>
+        <label>  Email</label>
         <input type='text' id='studentEmail' ng-model='studentEmail' class="form-control">
         
 
@@ -586,7 +599,9 @@
     </div>
 
 </form>
-            
+       
+    </div>
+    <!--end panel -->
             
     </div>
     <!--end col-md-row12 1 -->
@@ -759,13 +774,18 @@
 
    </div>
 
-    
+  
+                        
+                        
+<div class="panel panel-default">                          
+                        
+                        
 <form class="navbar-form navbar-left" role="search">
-      <h3> New Question: </h3>       
-
- 
-
-    <div>
+     
+    
+ <div class="form-group">
+    
+      <label> <h3><span class="label label-default"> New Question: </span></h3></label>       
 
         <label> Number</label>
         <input type='text' id='questionNumber' ng-model='questionNumber' class="form-control">
@@ -779,38 +799,33 @@
         <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
     </div>
+    
+    <div class="form-group">
+                   
+    <label> <h3><span class="label label-default"> New Answer: </span></h3></label>
 
+   
 
-
-    </form>
-
-
-                        
-   <form class="navbar-form navbar-left" role="search">                     
-    <h3> New Answer: </h3>
-
-    <div>
-
-        <label>Question Number</label>
+        <label>Number</label>
         <input type='text' id='questionNumber' ng-model='questionNumber' class="form-control">
         
 
-        <label>Answer Number</label>
+        <label>Number</label>
         <input type='text' id='answerNumber' ng-model='answerNumber' class="form-control">
         
 
-        <label> Details</label>
+        <label>Details</label>
         <input type='text' id='answerDetails' ng-model='answerDetails' class="form-control">
 
 
         <button class='btn btn-default btn-lg' ng-click='saveAnswer()'>
             <span class='glyphicon glyphicon-floppy-disk'></span></button>
 
-    </div>
-
-
+     </div>   
+        
  </form>
 
+</div>
 
 
     </div>
