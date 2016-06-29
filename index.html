@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <!-- AngularFire -->
-    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>    
     <script src="TeacherAssistant.js"></script>
     <title>Teacher Assistant</title>
 </head>
@@ -343,8 +343,8 @@
 
    <div class="panel panel-default">
   
-       <div class="panel-heading"> <span ng-show="answerDetails">       <button class='btn btn-default btn-lg' ng-click='saveChoosenAnswer(choosenAnswer)'> 
-                            <span class='glyphicon glyphicon-floppy-saved'></span> </button>  </span>  <h2>   <span class="label label-default">
+       <div class="panel-heading"> <span ng-show="answerDetails">       <button class='btn btn-default btn-lg' ng-click='saveChoosenAnswer(choosenAnswer)'> <h2>    {{answerNumber}}     
+                            <span class='glyphicon glyphicon-floppy-saved'></span></h2> </button>  </span>  <h2>   <span class="label label-default">
           " {{answerDetails}} " </span> 
             
                              </h2> </div>
@@ -632,18 +632,23 @@
                     <div class="col-md-12">
 
                     <div class="panel panel-default">
-  
-                             <div class="panel-heading"><h3>Selected Question: {{questionNumber}} <small> {{questionDetails}} </small>    
-                     
-  
-                        <span ng-show="questionDetails"> <button class='btn btn-default btn-lg' ng-click='displayAnswers(questionNumber)'>
-                            Statistics <span class='glyphicon glyphicon-blackboard'></span></button>
-    </span>
-
-      
-    </h3>
-     </div>                            
-     </div>
+                        
+                        
+                        <div class="panel-heading">  
+                            
+                             <span ng-show="questionDetails"> <button class='btn btn-default btn-lg' onclick="showEl('customPrompt')" style="cursor:pointer;" ng-click='displayStats(questionNumber)'>
+                            
+                                 <h2>  {{questionNumber}}  STATISTICS <span class='glyphicon glyphicon-blackboard'></span></h2></button>
+                        </span>
+                            
+                            
+                            <h2>  <span class="label label-default">  
+                                " {{questionDetails}} " </span> <br>
+                
+                            </h2>
+                            
+                   </div>                            
+              </div>
     
 
 
@@ -651,7 +656,7 @@
                         
         <div class="panel panel-default">
   
-            <div class="panel-heading"> <h3>Student Answers for:  <small> {{questionNumber}} </small> </h3> </div>
+            <div class="panel-heading"> <h2><span class="label label-default">All Student Answers: </span> <small>    {{questionNumber}} </small>  </h2></div>
  
 
     <table class='table table-bordered'>
@@ -689,7 +694,7 @@
             
        <div class="panel panel-default">
   
-           <div class="panel-heading"> <h3>All Answers for: <small>{{questionDetails}} </small> </h3>   </div>
+           <div class="panel-heading"> <h2><span class="label label-default">Available Choices: </span>  <small>    {{questionNumber}} </small>  </h2> </div>
             
             
    
@@ -733,7 +738,7 @@
                         
      <div class="panel panel-default">
   
-           <div class="panel-heading"> <h3>All Questions:  </h3> </div>                   
+         <div class="panel-heading"> <h2><span class="label label-default">Current Questions:  </span></h2> </div>                   
                         
                         
                         
@@ -810,7 +815,7 @@
         <input type='text' id='questionNumber' ng-model='questionNumber' class="form-control">
         
 
-        <label>Number</label>
+        <label>Answer Number</label>
         <input type='text' id='answerNumber' ng-model='answerNumber' class="form-control">
         
 
@@ -914,7 +919,52 @@
 
     </div>
     <!--end container-->
+    
 
+    
+<style type="text/css">
+
+#customPrompt {
+	position:absolute;
+	left:200px;
+	top:200px;
+	width:800px;
+	height:500px;
+	z-index:2000;
+	background-color: darkgrey;
+}
+
+</style>
+
+
+
+<script type="text/javascript">
+
+function showEl(id)
+{
+	var el = document.getElementById(id);
+	el.style.display = "";
+	
+}
+function hideEl(id)
+{
+	var el = document.getElementById(id);
+	el.style.display = "none";
+	
+}
+</script>
+
+
+<!-- CUSTOM FLOATING PROMPT -->
+<div id="customPrompt" style="display:none;" onClick="hideEl('customPrompt')">
+  
+    <img height="500" width="800" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Truncated_Bar_Graph.svg/2000px-Truncated_Bar_Graph.svg.png">
+    
+ 
+</div>
+<!-- END CUSTOM PROMPT -->    
+    
+    
 
 </body>
 

@@ -598,17 +598,16 @@ app.controller('studentCtrl', ["$scope", "chatMessages",  function ($scope, chat
     
     
     // Display statistics based on students answers 
-    $scope.displayResults = function (questionId) {
+    $scope.displayStats = function (questionId) {
         
-        console.log('Inside displayAnswers() ');
+        console.log('Inside displayStats() ');
         console.log('This is questionId to display: ');
         console.log(questionId);
         
    
        // TODO:   Calculate sttistics based on students answers
         
-        
-        
+   
     };
     
     
